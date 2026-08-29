@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum StatutBien {
+  DISPONIBLE
+  RESERVE
+  VENDU
+  LOUE
+}
+
+enum TypeBien {
+  APPARTEMENT
+  TERRAIN
+  LOCAL
+  VILLA
+}
+
+enum ServiceBien {
+  LOCATION
+  VENTE
+}
+
+enum StatutDemande {
+  EN_ATTENTE
+  CONTACTE
+  VISITE_CONFIRMEE
+  TERMINEE
+  ANNULEE
+}
+
+model User {
+  id        String   @id @default(uuid())
+  nom       String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favoris Bien[]
+}
+
+model Bien {
+  id          String      @id @default(uuid())
+
+  nom         String
+  description String
+
+  prix        Float
+  negociable  Boolean     @default(false)
+
+  statut      StatutBien  @default(DISPONIBLE)
+
+  localisation String
+  superficie   Float
+
+  type        TypeBien
+  service     ServiceBien
+
+  features    String[]
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  localisationMap String?
+
+
+
+  images      String[]
+  demandes    DemandeVisite[]
+
+  favoriPar User[]
+
+  @@index([statut])
+  @@index([type])
+  @@index([service])
+  @@index([localisation])
+}
+
+model DemandeVisite {
+  id             String          @id @default(uuid())
+  nom            String
+  email          String
+  telephone      String
+
+  dateSouhaitee  DateTime
+  message        String?
+
+  statut         StatutDemande   @default(EN_ATTENTE)
+
+  bienId         String
+  bien           Bien            @relation(fields: [bienId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([bienId])
+  @@index([statut])
+}

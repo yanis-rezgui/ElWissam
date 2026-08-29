@@ -1,0 +1,23 @@
+services:
+  # PostgreSQL database for the real estate platform
+  immo_db:
+    image: postgres:15-alpine
+    container_name: immo_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: yanis_dev
+      POSTGRES_PASSWORD: my_local_password123
+      POSTGRES_DB: immo_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - immo_postgres_data:/var/lib/postgresql/data
+    networks:
+      - immo_network
+
+volumes:
+  immo_postgres_data:
+
+networks:
+  immo_network:
+    driver: bridge
