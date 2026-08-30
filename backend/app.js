@@ -9,6 +9,7 @@ import seedTerrain from "./scripts/seed.js";
 import seedDatabase from "./scripts/seed.js";
 import biensRouter from "./routes/bien.routes.js";
 import reservationRouter from "./routes/visite.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 
 
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended : true}))
 
 app.use('/api/v1/biens', biensRouter)
 app.use('/api/v1/visites', reservationRouter);
+app.use('/api/v1/auth', authRouter);
 
 app.use(errorMiddleware);
 

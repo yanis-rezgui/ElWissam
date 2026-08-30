@@ -8,6 +8,8 @@ import Description from "../Components/BienDetailsComponents/Description";
 import Features from "../Components/BienDetailsComponents/Features";
 import Map from "../Components/BienDetailsComponents/Map";
 import VisiteForm from "../Components/BienDetailsComponents/VisiteForm";
+import DetailsTypes from "../Components/BienDetailsComponents/DetailsTypes";
+import VisiteTips from "../Components/BienDetailsComponents/VisiteTips";
 
 
 
@@ -26,8 +28,8 @@ const BienDetails = () => {
            
            <DetailsHero/>
 
-         <div className="flex flex-row w-full px-20 max-[1000px]:px-5 items-start mt-10 gap-10 max-[1200px]:px-10
-         max-[850px]:flex-col max-[850px]:items-center
+         <div className="flex flex-row w-full px-20 max-[1000px]:px-5 items-start mt-10 gap-15 max-[1200px]:px-10
+         max-[850px]:flex-col max-[850px]:items-center mb-15
          ">
            <div className="flex flex-col w-full ">
               
@@ -38,8 +40,10 @@ const BienDetails = () => {
               <Map/>
            </div>
 
-           <div>
+           <div className="flex flex-col gap-5 items-center">
             <VisiteForm/>
+            <VisiteTips/>
+            <DetailsTypes/>
            </div>
         </div>
 

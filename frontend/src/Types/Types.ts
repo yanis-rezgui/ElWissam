@@ -171,3 +171,13 @@ export interface BienFilterType {
 
   search?: string;
 }
+
+export interface BiensStats {
+    totalBiens: number;
+    biensParType: {
+        APPARTEMENT: number;
+        TERRAIN: number;
+        LOCAL: number;
+        VILLA: number;
+    };
+}

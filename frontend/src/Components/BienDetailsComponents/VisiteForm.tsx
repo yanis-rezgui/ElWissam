@@ -10,7 +10,7 @@ const VisiteForm = () => {
     const {addVisite, successMsg, errorMsg} = useVisiteContext();
     const {currentBien} = useBiensContext();
 
-    const submitForm = async(e : React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const submitForm = async(e : React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
 
@@ -31,6 +31,8 @@ const VisiteForm = () => {
         if(!message || message === "") return;
 
         await addVisite(nom, email, telephone, dateSouhaitee, message, currentBien!.id);
+        
+        form.reset()
 
     }
 
@@ -39,7 +41,9 @@ const VisiteForm = () => {
     return(
         <form 
         onSubmit={submitForm}
-         className="w-[400px] flex flex-col gap-3 items-center bg-white shadow-2xl p-5 rounded-[10px]"
+         className="w-[400px] flex flex-col gap-3 items-center bg-white shadow-2xl p-5 rounded-[10px]
+         max-[450px]:w-[300px]
+         "
          id="visite"
          >
             
@@ -134,16 +138,16 @@ const VisiteForm = () => {
                 🕐 Réponse généralement sous 24 heures ouvrées.
             </p>
             </div>
-           <div className="mt-3 h-[30px]">
+           <div className=" h-[45px] max-[500px]:h-[60px]">
             {errorMsg && 
-             <p className="text-red-600 text-[16px] font-bold">
+             <p className="text-red-700 font-[500] text-[14px] text-center leading-5">
                 {errorMsg}
              </p>
             }
 
             {
                 successMsg &&
-                <p className="text-green-600 text-[16px] font-bold">
+                <p className="text-green-700 font-[500] text-[14px] text-center leading-5">
                     {successMsg}
                 </p>
             }

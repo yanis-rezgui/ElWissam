@@ -7,6 +7,8 @@ import { BiensProvider } from './Contexts/BiensContext'
 import Biens from './Pages/Biens' 
 import BienDetails from './Pages/BienDetails'
 import { VisiteProvider } from './Contexts/VisiteContext'
+import { AuthProvider } from './Contexts/AuthContext'
+import Profile from './Pages/Profile'
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
     <>
      <BiensProvider>
       <VisiteProvider>
+        <AuthProvider>
       <Routes>
 
         <Route path="/" element={
@@ -39,7 +42,15 @@ function App() {
             <BienDetails/>
           </>
         }/>
+
+        <Route path='/profile' element={
+          <>
+            <Header/>
+            <Profile/>
+          </>
+        }/>
       </Routes>
+      </AuthProvider>
       </VisiteProvider>
       </BiensProvider>
     </>

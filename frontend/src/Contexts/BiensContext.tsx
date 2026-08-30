@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Bien, BienFilterType } from "../Types/Types";
+import type { Bien, BienFilterType, BiensStats } from "../Types/Types";
+
 
 
 
@@ -21,6 +22,10 @@ interface BiensContextType{
     getBien : (id : string)=>Promise<void>;
     loadingBien : boolean;
     currentBien : Bien | null;
+    biensStats : BiensStats;
+    loadingBiensStats : boolean;
+    getBiensStats: () => Promise<void>;
+
 }
 
 
@@ -32,6 +37,16 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
     const [loadingBiens, setLoadingBiens] = useState<boolean>(false);
     const [loadingBien, setLoadingBien] = useState<boolean>(false);
     const [currentBien, setCurrentBien] = useState<Bien | null>(null)
+    const [loadingBiensStats, setLoadingBiensStats] = useState<boolean>(false);
+    const [biensStats, setBiensStats] = useState<BiensStats>({
+        totalBiens : 0,
+        biensParType : {
+                    APPARTEMENT: 0,
+        TERRAIN: 0,
+        LOCAL: 0,
+        VILLA: 0,
+        }
+    });
 
     const [biensFilter, setBiensFilter] = useState<BienFilterType>(()=>{
         const saved = localStorage.getItem('biensFilter');
@@ -134,9 +149,37 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
         }
     }
 
+
+    const getBiensStats = async() => {
+
+        setLoadingBiensStats(true);
+        try{
+           const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/biens/stats`,{
+                method : "GET"
+            });
+
+            const data = await res.json();
+
+            if(!res.ok){
+                throw new Error(data.error || data.message || "Error in getting biens stats")
+            }
+
+            setBiensStats(data.data)
+            console.log("Biens stats : ", data.data);
+        }catch(err){
+            console.error(err);
+        }finally{
+            setLoadingBiensStats(false);
+        }
+    }
+
     useEffect(()=>{
         getAllBiens();
-    }, [biensFilter])
+    }, [biensFilter, page, limit])
+
+    useEffect(()=>{
+        getBiensStats();
+    }, []);
 
 
     return <BiensContext.Provider value={{
@@ -154,7 +197,10 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
     totalPages,
     getBien,
     loadingBien,
-    currentBien 
+    currentBien,
+    biensStats,
+    loadingBiensStats ,
+    getBiensStats
     }}>
         {children}
     </BiensContext.Provider>

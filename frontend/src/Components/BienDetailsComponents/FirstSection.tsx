@@ -102,6 +102,16 @@ const FirstSection = () => {
                 <p>{currentBien?.localisation}</p>
             </div>
 
+            <a
+            href="#visite"
+            className="bg-[#222344] text-[#cdad7d] w-[190px] text-[15px] py-2 rounded-[5px] font-[600]
+            cursor-pointer transition-opacity duration-200 hover:opacity-80 active:opacity-60 hidden max-[850px]:flex
+            flex-row  items-center justify-center
+
+            ">
+               Réserver une visite <i className="fa-solid fa-location-arrow ml-1"></i> 
+            </a>
+
            </div>
          
            <div className="flex flex-col gap-1">

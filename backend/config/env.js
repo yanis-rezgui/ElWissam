@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "production") {
   config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 }
 
-const {
+export const {
   
 NODE_ENV,
 PORT,

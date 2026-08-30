@@ -163,3 +163,38 @@ export const getBien = async(req , res , next) => {
         next(err);
     }
 }
+
+
+export const getBiensStats = async (req, res, next) => {
+    try {
+        const totalBiens = await prisma.bien.count();
+
+        const biensParType = await prisma.bien.groupBy({
+            by: ["type"],
+            _count: {
+                id: true,
+            },
+        });
+
+        const stats = {
+            APPARTEMENT: 0,
+            TERRAIN: 0,
+            LOCAL: 0,
+            VILLA: 0,
+        };
+
+        biensParType.forEach((item) => {
+            stats[item.type] = item._count.id;
+        });
+
+        return res.status(200).json({
+            data : {
+            totalBiens,
+            biensParType: stats,
+            }
+        });
+
+    } catch (error) {
+       next(error)
+    }
+};
