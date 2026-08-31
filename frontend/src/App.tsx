@@ -9,6 +9,7 @@ import BienDetails from './Pages/BienDetails'
 import { VisiteProvider } from './Contexts/VisiteContext'
 import { AuthProvider } from './Contexts/AuthContext'
 import Profile from './Pages/Profile'
+import { UserProvider } from './Contexts/UserContext'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
      <BiensProvider>
       <VisiteProvider>
         <AuthProvider>
+          <UserProvider>
       <Routes>
 
         <Route path="/" element={
@@ -50,6 +52,7 @@ function App() {
           </>
         }/>
       </Routes>
+      </UserProvider>
       </AuthProvider>
       </VisiteProvider>
       </BiensProvider>

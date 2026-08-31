@@ -7,7 +7,7 @@ import { useAuthContext } from "../../Contexts/AuthContext";
 
 const SignIn = () => {
 
-    const {setShowSignIn, signIn, loadingSignIn} = useAuthContext();
+    const {setShowSignIn, signIn, loadingSignIn, msg} = useAuthContext();
 
     const handleForm = async(e : React.FormEvent<HTMLFormElement>) => {
 
@@ -72,6 +72,15 @@ const SignIn = () => {
            transition-opacity duration-200 hover:opacity-80 active:opacity-60
            "
             >Mot de passe oublié ? </Link>
+
+            <div className="h-[30px] flex justify-center items-center text-center">
+
+               {msg &&
+                 <p className="text-[15px] text-red-600 font-[500]">
+                    {msg}
+                 </p>
+               }
+             </div>
 
             <button type="submit"
              className="w-full text-gray-50 bg-[#222344] p-2 rounded-[5px] text-[15px]

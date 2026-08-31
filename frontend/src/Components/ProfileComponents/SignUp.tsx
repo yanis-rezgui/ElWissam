@@ -7,7 +7,7 @@ import { useAuthContext } from "../../Contexts/AuthContext";
 
 const SignUp = () => {
 
-    const {setShowSignIn, signUp, loadingSignUp} = useAuthContext();
+    const {setShowSignIn, signUp, loadingSignUp, msg} = useAuthContext();
 
     const handleFormSubmit = async(e : React.FormEvent<HTMLFormElement>) => {
 
@@ -47,7 +47,7 @@ const SignUp = () => {
                 >
                     Prénom*
                 </label>
-                <input type="email"
+                <input type="text"
                 name="firstName"
                 placeholder="Ex: Ahmed"
                 className="p-2 text-[15px] bg-gray-50 border border-gray-300 rounded-[5px]"
@@ -61,7 +61,7 @@ const SignUp = () => {
                 >
                     Nom*
                 </label>
-                <input type="email"
+                <input type="text"
                 name="lastName"
                 className="p-2 text-[15px] bg-gray-50 border border-gray-300 rounded-[5px]"
                 placeholder="Ex: Chaib"
@@ -114,6 +114,15 @@ const SignUp = () => {
                 />
             </div>
 
+         
+             <div className="h-[30px] flex justify-center items-center text-center">
+
+               {msg &&
+                 <p className="text-[15px] text-red-600 font-[500]">
+                    {msg}
+                 </p>
+               }
+             </div>
            
 
             <button type="submit"

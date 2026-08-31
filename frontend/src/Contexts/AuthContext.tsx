@@ -15,6 +15,8 @@ interface AuthContextType{
     msg : string | null;
     showSignIn : boolean;
     setShowSignIn : (b : boolean)=>void;
+    showSignOut : boolean;
+    setShowSignOut : (b : boolean)=>void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -40,12 +42,15 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
     const [loadingSignOut, setLoadingSignOut] = useState<boolean>(false);
     const [showSignIn, setShowSignIn] = useState<boolean>(false);
 
+    const [showSignOut, setShowSignOut] = useState<boolean>(false);
+
 
     const signUp = async(firstName : string, lastName : string, email : string, password1 : string, password2: string) => {
 
         try{
 
             setLoadingSignUp(true);
+            setMsg(null)
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/sign-up`, {
                 method : "POST",
                 headers : {
@@ -61,7 +66,7 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
                 throw new Error(data.error || data.message || "Error in signing up");
             }
 
-            setUser(data.data.userReponse);
+            setUser(data.data.userResponse);
             setToken(data.data.token);
             
         }catch(err){
@@ -76,6 +81,7 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
 
         try{
 
+            setMsg(null);
             setLoadingSignIn(true);
 
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/sign-in`, {
@@ -106,6 +112,7 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
 
         try{
 
+            setMsg(null)
             setLoadingSignOut(true);
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/sign-out`, {
                 method : "POST",
@@ -156,7 +163,9 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
     loadingSignOut,
     msg,
     showSignIn,
-    setShowSignIn
+    setShowSignIn,
+    showSignOut, 
+    setShowSignOut
     }}>
         {children}
     </AuthContext.Provider>

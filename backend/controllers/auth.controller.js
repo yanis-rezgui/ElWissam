@@ -68,18 +68,20 @@ export const signUp = async(req , res , next) => {
         const hashedPassword = await bcrypt.hash(password1, salt);
 
         const newUser = await prisma.user.create({
+            data : {
             firstName,
             lastName,
             email,
-            password : hashedPassword
+            password : hashedPassword}
         });
 
          const token = jwt.sign({userId : newUser.id}, JWT_SECRET, {expiresIn : JWT_EXPIRES_IN});
 
         const userResponse = {
+            id : newUser.id,
             firstName : newUser.firstName,
             lastName : newUser.lastName,
-            email : newUser.lastName,
+            email : newUser.email,
             role : newUser.role,
             createdAt : newUser.createdAt,
             updatedAt : newUser.updatedAt
@@ -141,6 +143,7 @@ export const signIn = async(req, res, next) => {
         const token = jwt.sign({userId : existingUser.id}, JWT_SECRET, {expiresIn : JWT_EXPIRES_IN});
 
          const userResponse = {
+            id : existingUser.id,
             firstName : existingUser.firstName,
             lastName : existingUser.lastName,
             email : existingUser.lastName,
@@ -176,3 +179,5 @@ export const signOut = async(req, res, next) => {
         next(err);
     }
 }
+
+

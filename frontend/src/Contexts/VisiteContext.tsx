@@ -10,7 +10,6 @@ interface VisiteContextType{
             message : string,
             bienId : string
         ) => void;
-
     loadingAddVisite : boolean;
     errorMsg : string | null;
     successMsg : string |  null

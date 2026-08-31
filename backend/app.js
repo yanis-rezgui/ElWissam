@@ -10,6 +10,7 @@ import seedDatabase from "./scripts/seed.js";
 import biensRouter from "./routes/bien.routes.js";
 import reservationRouter from "./routes/visite.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
 
 
 
@@ -31,13 +32,14 @@ app.use(express.urlencoded({extended : true}))
 app.use('/api/v1/biens', biensRouter)
 app.use('/api/v1/visites', reservationRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/user', userRouter);
 
 app.use(errorMiddleware);
 
 const startServer = async() => {
 
     try{
-        console.log("Trying to connect to databse : ");
+        console.log("Trying to connect to database : ");
         app.listen(PORT, async()=>{
             console.log(`App running on : http://localhost:${PORT}`);
             await test();
