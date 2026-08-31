@@ -15,14 +15,24 @@ export const getCurrentUser = async(req , res , next) => {
             });
         }
 
+        const userWithFavorites = await prisma.user.findUnique({
+            where : {
+                id : user.id
+            },
+            include : {
+                favoris : true
+            }
+        })
+
         const userResponse = {
-            id : user.id,
-            firstName : user.firstName,
-            lastName : user.lastName,
-            email : user.email,
-            role : user.role,
-            createdAt : user.createdAt,
-            updatedAt : user.updatedAt
+            id : userWithFavorites.id,
+            firstName : userWithFavorites.firstName,
+            lastName : userWithFavorites.lastName,
+            email : userWithFavorites.email,
+            role : userWithFavorites.role,
+            favoris : userWithFavorites.favoris,
+            createdAt : userWithFavorites.createdAt,
+            updatedAt : userWithFavorites.updatedAt
         }
 
         return res.status(200).json({
@@ -73,6 +83,9 @@ export const updateUserInfo = async(req , res , next) => {
             data : {
                 firstName : firstName.trim(),
                 lastName : lastName.trim()
+            },
+            include : {
+                favoris : true
             }
         });
 
@@ -82,6 +95,7 @@ export const updateUserInfo = async(req , res , next) => {
             lastName : updatedUser.lastName,
             email : updatedUser.email,
             role : updatedUser.role,
+            favoris: updatedUser.favoris,
             createdAt : updatedUser.createdAt,
             updatedAt : updatedUser.updatedAt
         }

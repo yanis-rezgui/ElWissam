@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useEffectEvent, useState } from "react";
+import { createContext, useContext, useEffect,  useState } from "react";
 import { useAuthContext } from "./AuthContext";
 
 
@@ -29,7 +29,10 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
 
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/user/`, {
                 method : "GET",
-                
+                headers : {
+                    "Content-Type" : 'application/json',
+                    Authorization : `Bearer ${token}`
+                }
             });
 
             const data = await res.json();
@@ -102,7 +105,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
     }
 
     useEffect(()=>{
-        getUser()
+        getUser() 
     }, [user])
 
     return <UserContext.Provider value={{

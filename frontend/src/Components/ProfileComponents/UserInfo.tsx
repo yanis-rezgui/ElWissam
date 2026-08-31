@@ -18,6 +18,7 @@ const UserInfo = () => {
         if (!firstName.trim() || !lastName.trim()) return;
 
         await updateUser(firstName.trim(), lastName.trim());
+        setShowModify(false)
     };
 
     return (
@@ -46,7 +47,7 @@ const UserInfo = () => {
                 flex
                 flex-col
                 items-center
-                max-[450px]:w-full
+                max-[450px]:w-[350px]
             "
         >
 

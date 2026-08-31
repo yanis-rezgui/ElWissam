@@ -42,6 +42,7 @@ export interface User {
   lastName : string;
   email: string;
   role: Role;
+  favoris : Bien[],
   createdAt: string;
   updatedAt: string;
 }

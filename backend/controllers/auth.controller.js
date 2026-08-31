@@ -38,6 +38,9 @@ export const signUp = async(req , res , next) => {
         const existingUser = await prisma.user.findFirst({
             where : {
                 email
+            },
+            include : {
+                favoris : true
             }
         });
 
@@ -83,6 +86,7 @@ export const signUp = async(req , res , next) => {
             lastName : newUser.lastName,
             email : newUser.email,
             role : newUser.role,
+            favoris : newUser.favoris,
             createdAt : newUser.createdAt,
             updatedAt : newUser.updatedAt
         }
@@ -121,6 +125,9 @@ export const signIn = async(req, res, next) => {
         const existingUser = await prisma.user.findUnique({
             where : {
                 email
+            },
+            include : {
+                favoris : true
             }
         });
 
@@ -148,6 +155,7 @@ export const signIn = async(req, res, next) => {
             lastName : existingUser.lastName,
             email : existingUser.lastName,
             role : existingUser.role,
+            favoris : existingUser.favoris,
             createdAt : existingUser.createdAt,
             updatedAt : existingUser.updatedAt
         }

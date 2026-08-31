@@ -5,6 +5,9 @@ import SignUp from "../Components/ProfileComponents/SignUp";
 import UserInfo from "../Components/ProfileComponents/UserInfo";
 import SignOutPop from "../Components/ProfileComponents/SignOutPop";
 import ExploreComponent from "../Components/ProfileComponents/ExploreComponent";
+import StatsComponent from "../Components/ProfileComponents/StatsComponent";
+import SecurityComponent from "../Components/ProfileComponents/SecurityComponent";
+import SecurityInfo from "../Components/ProfileComponents/SecurityInfo";
 
 
 
@@ -47,11 +50,18 @@ const Profile = () => {
 
                 </p>
 
-                <div className="flex flex-row items-start gap-5 mt-10">
-                    <div className="flex flex-col">
+                <div className="flex flex-row items-start gap-5 mt-10 max-[900px]:flex-col max-[900px]:items-center
+                max-[900px]:justify-center mb-10
+                ">
+                    <div className="flex flex-col items-center gap-5">
                         <UserInfo/>
+                        <SecurityComponent/>
+                        <SecurityInfo/>
                     </div>
+                    <div className="flex flex-col items-center gap-6">
                     <ExploreComponent/>
+                    <StatsComponent/>
+                    </div>
                 </div>
             </>
 }
@@ -62,5 +72,6 @@ const Profile = () => {
         </>
     )
 }
+
 
 export default memo(Profile);

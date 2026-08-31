@@ -44,6 +44,7 @@ const pages = [
                {pages.map((p)=>{
                 return(
                   <div onClick={()=>navigate(`${p.href}`)}
+                  key={p.name}
                   className="flex flex-row items-center gap-2 p-2 border-t border-t-gray-300
                   cursor-pointer transition-opacity duration-200 hover:opacity-80
                   active:opacity-60
