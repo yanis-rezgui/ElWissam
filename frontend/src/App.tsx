@@ -10,6 +10,8 @@ import { VisiteProvider } from './Contexts/VisiteContext'
 import { AuthProvider } from './Contexts/AuthContext'
 import Profile from './Pages/Profile'
 import { UserProvider } from './Contexts/UserContext'
+import Services from './Pages/Services'
+import Contact from './Pages/Contact'
 
 
 function App() {
@@ -49,6 +51,20 @@ function App() {
           <>
             <Header/>
             <Profile/>
+          </>
+        }/>
+
+        <Route path='/services' element={
+          <>
+            <Header/>
+            <Services/>
+          </>
+        }/>
+
+        <Route path="/contact" element={
+          <>
+            <Header/>
+            <Contact/>
           </>
         }/>
       </Routes>

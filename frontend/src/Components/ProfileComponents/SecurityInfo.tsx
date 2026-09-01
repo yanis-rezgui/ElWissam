@@ -39,7 +39,7 @@ return(
                 p-3
                 flex
                 flex-col
-                max-[450px]:w-full
+                max-[450px]:w-[350px]
             "
     >
         <motion.div

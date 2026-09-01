@@ -44,8 +44,10 @@ const Header = () => {
         "
       >
         <Link to="/" className="text-[1.7em] font-bold">
-          EL WISSAM
+          EL AHLEM
         </Link>
+
+
 
         {/* Desktop navigation */}
         <nav className="flex flex-row items-center gap-5 max-[1000px]:gap-4 max-[700px]:hidden">
