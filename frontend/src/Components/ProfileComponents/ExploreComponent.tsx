@@ -24,7 +24,7 @@ const pages = [
   {
     name: "Favoris",
     href: "/favoris",
-    icon: "Heart",
+    icon: "Star",
   },
   {
     name: "Contact",

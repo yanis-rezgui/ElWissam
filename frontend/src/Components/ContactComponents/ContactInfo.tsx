@@ -154,6 +154,14 @@ const ContactInfo = () => {
                 Soumettre
             </button>
 
+                <div className="flex flex-col gap-1 mt-2"> 
+                    <p className="text-center text-gray-800 text-[14px] leading-4.5"> 
+                        🏡 Votre projet immobilier mérite une attention particulière. Partagez-nous votre demande, nous vous accompagnerons avec plaisir. 
+                        </p> 
+                    <p className="text-center text-gray-800 text-[15px]">
+                         🕐 Réponse généralement sous 24 heures ouvrées. 
+                         </p> 
+                </div>
             </form>
         </div>
     )

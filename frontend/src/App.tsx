@@ -12,6 +12,12 @@ import Profile from './Pages/Profile'
 import { UserProvider } from './Contexts/UserContext'
 import Services from './Pages/Services'
 import Contact from './Pages/Contact'
+import PublicRoute from './Layouts/PublicRoute'
+import PublicLayout from './Layouts/PublicLayout'
+import AdminRoute from './Layouts/AdminRoute'
+import AdminLayout from './Layouts/AdminLayout'
+import Dashboard from './AdminPages/Dashboard'
+import AdminBiens from './AdminPages/AdminBiens'
 
 
 function App() {
@@ -24,6 +30,12 @@ function App() {
         <AuthProvider>
           <UserProvider>
       <Routes>
+
+        <Route element={
+          <PublicRoute>
+            <PublicLayout/>
+          </PublicRoute>
+        }>
 
         <Route path="/" element={
           <>
@@ -67,6 +79,19 @@ function App() {
             <Contact/>
           </>
         }/>
+        </Route>
+
+
+        <Route
+      path='/admin/*'
+      element={
+        <AdminRoute>
+          <AdminLayout/>
+        </AdminRoute>
+      }>
+         <Route path='dashboard' element={<Dashboard/>}/>
+         <Route path='biens' element={<AdminBiens/>}/>
+      </Route>
       </Routes>
       </UserProvider>
       </AuthProvider>

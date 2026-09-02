@@ -20,7 +20,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
 
     const [loadingUpdateUser, setLoadingUpdateUser] = useState<boolean>(false);
     const [loadingUpdatePassword, setLoadingUpdatePassword] = useState<boolean>(false);
-    const {setUser, token, user} = useAuthContext();
+    const {setUser, token, user , signOut} = useAuthContext();
     const [msg, setMsg] = useState<string | null>(null);
 
     const getUser = async() => {
@@ -38,6 +38,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
             const data = await res.json();
 
             if(!res.ok){
+                if(res.status === 401) await signOut();
                 throw new Error(data.error || data.message || "Error in getting user");
             }
 
