@@ -107,7 +107,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
 
     useEffect(()=>{
         getUser() 
-    }, [user])
+    }, [])
 
     return <UserContext.Provider value={{
           getUser ,

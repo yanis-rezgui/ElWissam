@@ -19,7 +19,7 @@ const BiensSearch = () => {
              ">
 
                 <select name="" id=""
-                className="p-2 bg-gray-50 text-[#222344] rounded-[5px] text-[15px] cursor-pointer
+                className="p-2 bg-grapadding-top: 60px;y-50 text-[#222344] rounded-[5px] text-[15px] cursor-pointer
                 max-[750px]:w-full
                 "
                 value={biensFilter.service}

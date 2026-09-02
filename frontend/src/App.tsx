@@ -18,6 +18,9 @@ import AdminRoute from './Layouts/AdminRoute'
 import AdminLayout from './Layouts/AdminLayout'
 import Dashboard from './AdminPages/Dashboard'
 import AdminBiens from './AdminPages/AdminBiens'
+import AdminBienDetails from './AdminPages/AdminBienDetails'
+import { BiensAdminProvider } from './AdminContexts/BiensAdminContext'
+import AdminBienAjout from './AdminPages/AdminBienAjout'
 
 
 function App() {
@@ -29,6 +32,7 @@ function App() {
       <VisiteProvider>
         <AuthProvider>
           <UserProvider>
+            <BiensAdminProvider>
       <Routes>
 
         <Route element={
@@ -91,8 +95,11 @@ function App() {
       }>
          <Route path='dashboard' element={<Dashboard/>}/>
          <Route path='biens' element={<AdminBiens/>}/>
+         <Route path='bien/:id' element={<AdminBienDetails/>}/>
+         <Route path='addBien' element={<AdminBienAjout/>}/>
       </Route>
       </Routes>
+      </BiensAdminProvider>
       </UserProvider>
       </AuthProvider>
       </VisiteProvider>

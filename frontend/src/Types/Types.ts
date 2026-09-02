@@ -9,19 +9,19 @@ export type StatutBien  =
   | "RESERVE"
   | "VENDU"
   | "LOUE"
-  | "";
+  | "" | string;
 
 export type TypeBien =
   | "APPARTEMENT"
   | "TERRAIN"
   | "LOCAL"
   | "VILLA"
-  | "";
+  | "" | string;
 
 export type ServiceBien =
   | "LOCATION"
   | "VENTE"
-  | "";
+  | "" | string;
 
 export type StatutDemande =
   | "EN_ATTENTE"
@@ -29,7 +29,7 @@ export type StatutDemande =
   | "VISITE_CONFIRMEE"
   | "TERMINEE"
   | "ANNULEE"
-  | "";
+  | "" | string;
 
 
 // ============================================================
@@ -77,7 +77,7 @@ export interface Bien {
 
   images: string[];
 
-  localisationMap: string | null;
+  localisationMap: string;
 
   createdAt: string;
 

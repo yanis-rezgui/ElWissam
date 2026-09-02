@@ -41,7 +41,7 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
     const [biensStats, setBiensStats] = useState<BiensStats>({
         totalBiens : 0,
         biensParType : {
-                    APPARTEMENT: 0,
+        APPARTEMENT: 0,
         TERRAIN: 0,
         LOCAL: 0,
         VILLA: 0,
