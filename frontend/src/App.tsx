@@ -21,6 +21,8 @@ import AdminBiens from './AdminPages/AdminBiens'
 import AdminBienDetails from './AdminPages/AdminBienDetails'
 import { BiensAdminProvider } from './AdminContexts/BiensAdminContext'
 import AdminBienAjout from './AdminPages/AdminBienAjout'
+import { AdminVisitesProvider } from './AdminContexts/AdminVisitesContext'
+import AdminVisites from './AdminPages/AdminVisites'
 
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
         <AuthProvider>
           <UserProvider>
             <BiensAdminProvider>
+              <AdminVisitesProvider>
       <Routes>
 
         <Route element={
@@ -97,8 +100,10 @@ function App() {
          <Route path='biens' element={<AdminBiens/>}/>
          <Route path='bien/:id' element={<AdminBienDetails/>}/>
          <Route path='addBien' element={<AdminBienAjout/>}/>
+         <Route path='visites' element={<AdminVisites/>}/>
       </Route>
       </Routes>
+      </AdminVisitesProvider>
       </BiensAdminProvider>
       </UserProvider>
       </AuthProvider>

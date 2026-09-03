@@ -84,7 +84,7 @@ const AdminHeader = () => {
                     style={{backgroundColor : location.pathname === "/admin/dashboard" ? "#f3f4f6" : "",
                            fontWeight : location.pathname === "/admin/dashboard" ? "600" : "400"
                      }}
-                    className="p-3 flex flex-row items-center gap-2 text-[17px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
                         <Icon name="ChartBarBig" size={25}/>
                         <p>Dashboard</p>
                     </div>
@@ -96,9 +96,20 @@ const AdminHeader = () => {
                     style={{backgroundColor : location.pathname === "/admin/biens" ? "#f3f4f6" : "",
                            fontWeight : location.pathname === "/admin/biens" ? "600" : "400"
                      }}
-                    className="p-3 flex flex-row items-center gap-2 text-[17px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
                         <Icon name="House" size={25}/>
                         <p>Vos Biens</p>
+                    </div>
+
+
+                    <div
+                     onClick={()=>navigate('/admin/visites')}
+                    style={{backgroundColor : location.pathname === "/admin/visites" ? "#f3f4f6" : "",
+                           fontWeight : location.pathname === "/admin/visites" ? "600" : "400"
+                     }}
+                    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                        <Icon name="MapPinHouse" size={25}/>
+                        <p>Demandes de visites</p>
                     </div>
 
                     

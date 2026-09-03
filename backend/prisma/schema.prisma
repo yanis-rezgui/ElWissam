@@ -108,3 +108,14 @@ model DemandeVisite {
   @@index([bienId])
   @@index([statut])
 }
+
+model Testimonial {
+    id        String   @id @default(cuid())
+    fullName  String
+    message   String
+    rating    Int
+    active    Boolean  @default(true)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

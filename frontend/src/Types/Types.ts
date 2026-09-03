@@ -120,7 +120,7 @@ export interface DemandeVisite {
 
 export interface Pagination {
   page: number;
-
+  
   limit: number;
 
   total: number;
@@ -159,7 +159,6 @@ export interface GetBienResponse {
 
 export interface UserResponse {
   success: boolean;
-
   data: User;
 }
 
@@ -182,4 +181,14 @@ export interface BiensStats {
         LOCAL: number;
         VILLA: number;
     };
+}
+
+export interface Testimonial {
+    id: string;
+    fullName: string;
+    message: string;
+    rating: number;
+    active: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
