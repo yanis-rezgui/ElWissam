@@ -113,7 +113,7 @@ model Testimonial {
     id        String   @id @default(cuid())
     fullName  String
     message   String
-    rating    Int
+    rating    Float
     active    Boolean  @default(true)
 
     createdAt DateTime @default(now())

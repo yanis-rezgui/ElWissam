@@ -5,13 +5,15 @@ import isAdmin from "../middlewares/admin.middleware.js";
 
 const testimonialRouter = new Router();
 
-testimonialRouter.get('/', getTestimonialsClient);
+testimonialRouter.post('/', getTestimonialsClient);
 
-testimonialRouter.get('/all',authorize, isAdmin, getAllTestimonials);
+testimonialRouter.post('/all',authorize, isAdmin, getAllTestimonials);
+
+testimonialRouter.post('/add', authorize, isAdmin, addTestimonial);
 
 testimonialRouter.put('/:id', authorize, isAdmin, updateTestimonials);
 
-testimonialRouter.post('/', authorize, isAdmin, addTestimonial);
+
 
 testimonialRouter.delete('/:id', authorize, isAdmin, deleteTestimonial);
 

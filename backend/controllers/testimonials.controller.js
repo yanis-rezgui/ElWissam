@@ -157,7 +157,7 @@ export const addTestimonial = async(req , res, next) => {
             });
         }
 
-        if(typeof active === "boolean"){
+        if(typeof active !== "boolean"){
             return res.status(400).json({
                 success : false,
                 message : "active must be a boolean"

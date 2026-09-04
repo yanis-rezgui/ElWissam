@@ -23,6 +23,8 @@ import { BiensAdminProvider } from './AdminContexts/BiensAdminContext'
 import AdminBienAjout from './AdminPages/AdminBienAjout'
 import { AdminVisitesProvider } from './AdminContexts/AdminVisitesContext'
 import AdminVisites from './AdminPages/AdminVisites'
+import { TestimonialsAdminProvider } from './AdminContexts/TestimonialsAdminContext'
+import AdminTestimonials from './AdminPages/AdminTestimonials'
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
           <UserProvider>
             <BiensAdminProvider>
               <AdminVisitesProvider>
+                <TestimonialsAdminProvider>
       <Routes>
 
         <Route element={
@@ -101,8 +104,10 @@ function App() {
          <Route path='bien/:id' element={<AdminBienDetails/>}/>
          <Route path='addBien' element={<AdminBienAjout/>}/>
          <Route path='visites' element={<AdminVisites/>}/>
+         <Route path='testimonials' element={<AdminTestimonials/>}/>
       </Route>
       </Routes>
+      </TestimonialsAdminProvider>
       </AdminVisitesProvider>
       </BiensAdminProvider>
       </UserProvider>
