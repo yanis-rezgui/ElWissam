@@ -1,17 +1,24 @@
 import prisma from "../config/prisma.js"
+import bcrypt from "bcrypt"
 
 
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const {
+            page = 1,
+            limit = 10,
+            search,
+            role
+        } = req.query;
 
-export const getAllUsers = async(req , res , next) => {
+        const where = {};
 
-    try{
+        // =========================
+        // RECHERCHE
+        // =========================
 
-        const {search, role} = req.query;
-
-        const where= {}
-
-        if(search && search.trim() !== ""){
-              where.OR = [
+        if (search && search.trim() !== "") {
+            where.OR = [
                 {
                     firstName: {
                         contains: search.trim(),
@@ -29,17 +36,48 @@ export const getAllUsers = async(req , res , next) => {
                         contains: search.trim(),
                         mode: "insensitive",
                     },
-                }
+                },
             ];
         }
-        
 
-        if(role && ["ADMIN", "USER"].includes(role.trim())){
+        // =========================
+        // FILTRE ROLE
+        // =========================
+
+        if (
+            role &&
+            ["ADMIN", "USER"].includes(role.trim())
+        ) {
             where.role = role.trim();
         }
 
-        const allUsers = await prisma.user.findMany({
+        // =========================
+        // PAGINATION
+        // =========================
+
+        const currentPage = Math.max(
+            Number(page) || 1,
+            1
+        );
+
+        const pageLimit = Math.min(
+            Math.max(Number(limit) || 10, 1),
+            50
+        );
+
+        const skip = (currentPage - 1) * pageLimit;
+
+        // =========================
+        // RECUPERATION DES USERS
+        // =========================
+
+        const users = await prisma.user.findMany({
             where,
+
+            skip,
+
+            take: pageLimit,
+
             orderBy: [
                 {
                     createdAt: "desc",
@@ -48,26 +86,60 @@ export const getAllUsers = async(req , res , next) => {
                     id: "desc",
                 },
             ],
+
+            // IMPORTANT :
+            // On ne renvoie jamais le password
+            select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true,
+                role: true,
+                createdAt: true,
+            },
         });
 
+        // =========================
+        // TOTAL
+        // =========================
+
+        const total = await prisma.user.count({
+            where,
+        });
+
+        const totalPages = Math.ceil(
+            total / pageLimit
+        );
+
+        // =========================
+        // RESPONSE
+        // =========================
 
         return res.status(200).json({
-            success : true,
-            message : "users got successfully",
-            data: allUsers
+            success: true,
+
+            message: "Users got successfully",
+
+            data: users,
+
+            pagination: {
+                page: currentPage,
+                limit: pageLimit,
+                total,
+                totalPages,
+            },
         });
 
-    }catch(err){
+    } catch (err) {
         next(err);
     }
-}
-
+};
 
 export const updateUser = async(req , res , next) => {
 
     try{
 
-        const userId = req.user.id;
+        const userId = req.params.id;
 
         const user = await prisma.user.findUnique({
             where: {

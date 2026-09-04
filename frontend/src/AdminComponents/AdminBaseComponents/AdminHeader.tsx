@@ -112,6 +112,16 @@ const AdminHeader = () => {
                         <p>Demandes de visites</p>
                     </div>
 
+                     <div
+                     onClick={()=>navigate('/admin/users')}
+                    style={{backgroundColor : location.pathname === "/admin/users" ? "#f3f4f6" : "",
+                           fontWeight : location.pathname === "/admin/users" ? "600" : "400"
+                     }}
+                    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                        <Icon name="Users" size={25}/>
+                        <p>Utilisateurs</p>
+                    </div>
+
                     
 
 

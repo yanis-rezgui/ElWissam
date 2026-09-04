@@ -12,6 +12,7 @@ import reservationRouter from "./routes/visite.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import testimonialRouter from "./routes/testimonials.routes.js";
+import usersRouter from "./routes/users.routes.js";
 
 
 
@@ -35,6 +36,7 @@ app.use('/api/v1/visites', reservationRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/testimonials', testimonialRouter);
+app.use('/api/v1/users', usersRouter);
 
 app.use(errorMiddleware);
 
