@@ -13,6 +13,7 @@ import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import testimonialRouter from "./routes/testimonials.routes.js";
 import usersRouter from "./routes/users.routes.js";
+import agencyRouter from "./routes/agency.routes.js";
 
 
 
@@ -37,6 +38,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/testimonials', testimonialRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/agency', agencyRouter);
 
 app.use(errorMiddleware);
 
@@ -47,7 +49,6 @@ const startServer = async() => {
         app.listen(PORT, async()=>{
             console.log(`App running on : http://localhost:${PORT}`);
             await test();
-           //seedDatabase();
         });
     }catch(err){
         console.error(err);

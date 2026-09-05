@@ -27,6 +27,8 @@ import { TestimonialsAdminProvider } from './AdminContexts/TestimonialsAdminCont
 import AdminTestimonials from './AdminPages/AdminTestimonials'
 import { UsersAdminProvider } from './AdminContexts/UsersAdminContext'
 import AdminUsers from './AdminPages/AdminUsers'
+import { AgencyAdminProvider } from './AdminContexts/AgencyAdminContext'
+import General from './AdminPages/General'
 
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
               <AdminVisitesProvider>
                 <TestimonialsAdminProvider>
                   <UsersAdminProvider>
+                    <AgencyAdminProvider>
       <Routes>
 
         <Route element={
@@ -109,8 +112,10 @@ function App() {
          <Route path='visites' element={<AdminVisites/>}/>
          <Route path='testimonials' element={<AdminTestimonials/>}/>
          <Route path='users' element={<AdminUsers/>}/>
+         <Route path='general' element={<General/>}/>
       </Route>
       </Routes>
+      </AgencyAdminProvider>
       </UsersAdminProvider>
       </TestimonialsAdminProvider>
       </AdminVisitesProvider>

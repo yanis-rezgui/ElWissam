@@ -192,3 +192,20 @@ export interface Testimonial {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface SocialLink {
+  name: string;
+  url: string;
+}
+
+export interface Agency {
+  id: number;
+  name: string;
+  phone: string[];
+  email: string | null;
+  address: string;
+  mapsUrl: string | null;
+  socialLinks: SocialLink[] | null;
+  createdAt: string;
+  updatedAt: string;
+}

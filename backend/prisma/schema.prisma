@@ -119,3 +119,18 @@ model Testimonial {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+
+model Agency {
+  id          Int      @id @default(1)
+  name        String
+  phone       String[]
+  email       String?
+  address     String
+  mapsUrl     String?
+
+  socialLinks Json?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
