@@ -61,8 +61,7 @@ const StatutSelector = ({ visite }: { visite: DemandeVisite }) => {
             {open && (
                 <>
                     <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
-                    <div className="absolute left-0 top-full mt-1 z-20 bg-white border border-gray-200
-                    rounded-[8px] shadow-xl overflow-hidden min-w-[160px]">
+                    <div className="absolute left-0 top-full mt-1 z-50 bg-white border border-gray-200 rounded-[8px] shadow-xl overflow-hidden min-w-[160px]">
                         {STATUTS.map((s) => (
                             <button
                                 key={s}
@@ -113,7 +112,7 @@ const AdminVisitesTable = () => {
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="hidden md:block bg-white rounded-[10px] shadow-2xl overflow-hidden"
+                        className="hidden md:block bg-white rounded-[10px] shadow-2xl"
                     >
                         <table className="w-full text-left border-collapse">
                             <thead>

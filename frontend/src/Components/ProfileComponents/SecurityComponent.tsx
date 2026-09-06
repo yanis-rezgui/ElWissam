@@ -10,7 +10,7 @@ const SecurityComponent = () => {
     const [newPassword1, setNewPassword1] = useState<string>("");
     const [newPassword2, setNewPassword2] = useState<string>("");
 
-    const { updatePassword, loadingUpdatePassword } = useUserContext();
+    const { updatePassword, loadingUpdatePassword, msg } = useUserContext();
 
     const handleUpdate = async () => {
 
@@ -337,6 +337,39 @@ const SecurityComponent = () => {
 
                                 </div>
 
+                                 <div className="min-h-[30px] flex justify-center items-center text-center">
+
+                            <AnimatePresence mode="wait">
+
+                                {msg && (
+
+                                    <motion.p
+                                        initial={{
+                                            opacity: 0,
+                                            y: -5
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            y: 0
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            y: -5
+                                        }}
+                                        className="
+                                            text-[15px]
+                                            text-red-600
+                                            font-[500]
+                                        "
+                                    >
+                                        {msg}
+                                    </motion.p>
+
+                                )}
+
+                            </AnimatePresence>
+
+                        </div>
 
                                 {/* Submit */}
                                 <motion.button

@@ -1,5 +1,6 @@
 import { cloudinary } from "../config/env.js";
 import prisma from "../config/prisma.js";
+import { notifyAdmins } from "../services/notifications.service.js";
 
 
 export const updateBien = async (req, res, next) => {
@@ -372,6 +373,7 @@ if (
 }
  
             
+        const oldStatus = bien.statut;
 
 
         // =========================
@@ -384,6 +386,14 @@ if (
             },
             data: updates
         });
+
+            if (oldStatus !== updatedBien.statut) {
+        await notifyAdmins({
+            title: "Statut du bien modifié",
+            message: `Le bien "${updatedBien.nom}" est maintenant "${updatedBien.statut}".`,
+            type: "STATUS_CHANGED"
+        });
+    }
 
 
         return res.status(200).json({
@@ -727,6 +737,12 @@ export const addBien = async (req, res, next) => {
         // =========================
         // RESPONSE
         // =========================
+
+        await notifyAdmins({
+            title: "Nouveau bien ajouté",
+            message: `Le bien "${createdBien.nom}" a été ajouté au catalogue.`,
+            type: "NEW_BIEN"
+        });
 
         return res.status(201).json({
             success: true,

@@ -209,3 +209,36 @@ export interface Agency {
   createdAt: string;
   updatedAt: string;
 }
+
+
+export type NotificationType =
+    | "NEW_VISITE"
+    | "NEW_USER"
+    | "NEW_BIEN"
+    | "STATUS_CHANGED"
+    | "NEW_TESTIMONIAL"
+    | "SECURITY";
+
+
+export interface Notification {
+    id: string;
+    title: string;
+    message: string;
+    type: NotificationType;
+    read: boolean;
+    userId: string;
+    createdAt: string;
+}
+
+export interface NotificationsPagination {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+}
+
+export interface NotificationsStats {
+    total: number;
+    unread: number;
+    read: number;
+}

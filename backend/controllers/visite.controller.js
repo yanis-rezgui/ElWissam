@@ -1,4 +1,5 @@
 import prisma from "../config/prisma.js";
+import { notifyAdmins } from "../services/notifications.service.js";
 
 export const addVisite = async (req, res, next) => {
     try {
@@ -121,6 +122,12 @@ export const addVisite = async (req, res, next) => {
                     },
                 },
             },
+        });
+
+        await notifyAdmins({
+            title: "Nouvelle demande de visite",
+            message: `${nom} souhaite visiter le bien "${bien.nom}".`,
+            type: "NEW_VISITE"
         });
 
         // ============================================================
@@ -309,6 +316,12 @@ export const modifyStatus = async(req, res, next) => {
             include : {
                 bien : true
             }
+        });
+
+        await notifyAdmins({
+            title: "Statut de visite modifié",
+            message: `La demande de visite de ${newVisite.nom} est maintenant "${newVisite.statut}".`,
+            type: "STATUS_CHANGED"
         });
 
         return res.status(200).json({

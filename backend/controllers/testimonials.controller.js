@@ -1,4 +1,5 @@
 import prisma from "../config/prisma.js"
+import { notifyAdmins } from "../services/notifications.service.js";
 
 
 export const getTestimonialsClient = async(req , res , next) => {
@@ -172,6 +173,12 @@ export const addTestimonial = async(req , res, next) => {
                 rating : Number(rating),
                 active
             }
+        });
+
+        await notifyAdmins({
+            title: "Nouveau témoignage",
+            message: `${newTestimonial.fullName} a envoyé un nouveau témoignage.`,
+            type: "NEW_TESTIMONIAL"
         });
 
         return res.status(201).json({

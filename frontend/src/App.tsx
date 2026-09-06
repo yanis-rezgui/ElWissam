@@ -29,6 +29,9 @@ import { UsersAdminProvider } from './AdminContexts/UsersAdminContext'
 import AdminUsers from './AdminPages/AdminUsers'
 import { AgencyAdminProvider } from './AdminContexts/AgencyAdminContext'
 import General from './AdminPages/General'
+import AdminProfile from './AdminPages/AdminProfile'
+import Notifications from './AdminPages/Notifications'
+import { NotificationsProvider } from './AdminContexts/NotificationsContext'
 
 
 function App() {
@@ -45,6 +48,7 @@ function App() {
                 <TestimonialsAdminProvider>
                   <UsersAdminProvider>
                     <AgencyAdminProvider>
+                      <NotificationsProvider>
       <Routes>
 
         <Route element={
@@ -63,7 +67,7 @@ function App() {
 
         <Route path='/biens' element={
           <>
-             <Header/>
+             <Header/>Gérez vos informations personnelles, la sécurité de votre compte et vos préférences depuis un seul espace. Gardez votre profil à jour afin de profiter d’une expérience d’administration simple, sécurisée et adaptée à vos besoins.
              <Biens/>
           </>
         }/>
@@ -113,8 +117,11 @@ function App() {
          <Route path='testimonials' element={<AdminTestimonials/>}/>
          <Route path='users' element={<AdminUsers/>}/>
          <Route path='general' element={<General/>}/>
+         <Route path='profile' element={<AdminProfile/>}/>
+         <Route path='notifications' element={<Notifications/>}/>
       </Route>
       </Routes>
+      </NotificationsProvider>
       </AgencyAdminProvider>
       </UsersAdminProvider>
       </TestimonialsAdminProvider>

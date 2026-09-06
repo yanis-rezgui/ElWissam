@@ -53,6 +53,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
 
         try{
 
+            setMsg(null)
             setLoadingUpdateUser(true);
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/user/`,{
                 method : "PUT",
@@ -81,6 +82,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
     const updatePassword = async(oldPassword : string, newPassword1 : string, newPassword2 : string) => {
 
         try{
+            setMsg(null)
             setLoadingUpdatePassword(true);
 
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/user/password`,{
@@ -101,7 +103,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
         }catch(err){
             console.error(err);
         }finally{
-            setLoadingUpdateUser(false);
+            setLoadingUpdatePassword(false);
         }
     }
 

@@ -3,6 +3,7 @@ import prisma from "../config/prisma.js";
 import bcrypt from "bcrypt"
 import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js";
 import jwt from "jsonwebtoken"
+import { notifyAdmins } from "../services/notifications.service.js";
 
 
 
@@ -90,6 +91,12 @@ export const signUp = async(req , res , next) => {
             createdAt : newUser.createdAt,
             updatedAt : newUser.updatedAt
         }
+
+        await notifyAdmins({
+            title: "Nouvel utilisateur",
+            message: `${newUser.firstName} ${newUser.lastName} vient de créer un compte.`,
+            type: "NEW_USER"
+        });
 
         return res.status(201).json({
             success : false,
