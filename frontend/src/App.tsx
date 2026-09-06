@@ -33,6 +33,7 @@ import AdminProfile from './AdminPages/AdminProfile'
 import Notifications from './AdminPages/Notifications'
 import { NotificationsProvider } from './AdminContexts/NotificationsContext'
 import { DashboardProvider } from './AdminContexts/DashboardContext'
+import Guide from './AdminPages/Guide'
 
 
 function App() {
@@ -121,6 +122,7 @@ function App() {
          <Route path='general' element={<General/>}/>
          <Route path='profile' element={<AdminProfile/>}/>
          <Route path='notifications' element={<Notifications/>}/>
+         <Route path='guide' element={<Guide/>}/>
       </Route>
       </Routes>
       </DashboardProvider>

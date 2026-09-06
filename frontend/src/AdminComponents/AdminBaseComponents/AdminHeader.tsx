@@ -160,7 +160,15 @@ const AdminHeader = () => {
 
 
                 
-                    
+                     <div
+                     onClick={()=>navigate('/admin/guide')}
+                    style={{backgroundColor : location.pathname === "/admin/guide" ? "#f3f4f6" : "",
+                           fontWeight : location.pathname === "/admin/guide" ? "600" : "400"
+                     }}
+                    className="p-3 flex flex-row items-center gap-2 text-[17px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                        <Icon name="PanelRightDashed" size={25}/>
+                        <p>Guide d'utilisation</p>
+                    </div>
 
 
                   </div>
