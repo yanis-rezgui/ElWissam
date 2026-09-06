@@ -2,6 +2,7 @@ import  { memo, useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Contexts/AuthContext";
+import { useNotificationsContext } from "../../AdminContexts/NotificationsContext";
 import Icon from "../../Icons/Icons";
 
 
@@ -14,8 +15,8 @@ const AdminHeader = () => {
         return saved ? JSON.parse(saved) : false;
     });
 
-    const {user, signOut} = useAuthContext();
-    
+    const {signOut} = useAuthContext();
+    const { notificationsStats } = useNotificationsContext();
     
 
     const navigate = useNavigate();
@@ -89,15 +90,27 @@ const AdminHeader = () => {
                         <p>Dashboard</p>
                     </div>
 
-                     <div
-                    onClick={()=>navigate('/admin/notifications')}
-                    style={{backgroundColor : location.pathname === "/admin/notifications" ? "#f3f4f6" : "",
-                           fontWeight : location.pathname === "/admin/notifications" ? "600" : "400"
-                     }}
-                    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
-                        <Icon name="Bell" size={25}/>
-                        <p>Notifications</p>
-                    </div>
+                    <div
+    onClick={()=>navigate('/admin/notifications')}
+    style={{backgroundColor : location.pathname === "/admin/notifications" ? "#f3f4f6" : "",
+           fontWeight : location.pathname === "/admin/notifications" ? "600" : "400"
+     }}
+    className="p-3 flex flex-row items-center gap-2 text-[16px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+    <div className="relative">
+        <Icon name="Bell" size={25}/>
+
+        {notificationsStats.unread > 0 && (
+            <span
+                className="absolute -top-1.5 -right-2 min-w-[16px] h-[16px] px-1
+                flex items-center justify-center rounded-full
+                bg-red-500 text-white text-[10px] font-bold leading-none"
+            >
+                {notificationsStats.unread > 9 ? "9+" : notificationsStats.unread}
+            </span>
+        )}
+    </div>
+    <p>Notifications</p>
+</div>
 
                      
 

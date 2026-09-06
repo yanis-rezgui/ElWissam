@@ -32,6 +32,7 @@ import General from './AdminPages/General'
 import AdminProfile from './AdminPages/AdminProfile'
 import Notifications from './AdminPages/Notifications'
 import { NotificationsProvider } from './AdminContexts/NotificationsContext'
+import { DashboardProvider } from './AdminContexts/DashboardContext'
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
                   <UsersAdminProvider>
                     <AgencyAdminProvider>
                       <NotificationsProvider>
+                        <DashboardProvider>
       <Routes>
 
         <Route element={
@@ -121,6 +123,7 @@ function App() {
          <Route path='notifications' element={<Notifications/>}/>
       </Route>
       </Routes>
+      </DashboardProvider>
       </NotificationsProvider>
       </AgencyAdminProvider>
       </UsersAdminProvider>

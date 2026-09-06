@@ -12,6 +12,8 @@ import type {
 } from "../Types/Types";
 
 import { useAuthContext } from "../Contexts/AuthContext";
+import {socket} from "../socket/socket.js"
+
 
 
 // =========================================================
@@ -512,6 +514,86 @@ export const NotificationsProvider = ({
         }
 
     };
+
+
+        useEffect(() => {
+
+        if (!token) {
+            return;
+        }
+
+        // Ajouter le token à la connexion Socket.IO
+        socket.auth = {
+            token
+        };
+
+        // Nouvelle notification reçue
+        const handleNewNotification = (
+    notification: Notification
+) => {
+
+    console.log(
+        "Nouvelle notification :",
+        notification
+    );
+
+
+    setNotifications(prev => {
+
+        // Éviter les doublons
+        const alreadyExists = prev.some(
+            item => item.id === notification.id
+        );
+
+        if (alreadyExists) {
+            return prev;
+        }
+
+
+        // Si on affiche uniquement les notifications lues,
+        // la nouvelle notification ne doit pas être ajoutée.
+        if (read === true) {
+            return prev;
+        }
+
+
+        return [
+            notification,
+            ...prev
+        ];
+
+    });
+
+
+    // Mise à jour des statistiques
+    setNotificationsStats(prev => ({
+        total: prev.total + 1,
+        unread: prev.unread + 1,
+        read: prev.read
+    }));
+
+};
+        socket.on(
+            "notification:new",
+            handleNewNotification
+        );
+
+        // Connexion
+        socket.connect();
+
+        // Cleanup
+        return () => {
+
+            socket.off(
+                "notification:new",
+                handleNewNotification
+            );
+
+            socket.disconnect();
+
+        };
+
+    }, [token]);
 
 
     // =====================================================

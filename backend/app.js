@@ -3,7 +3,7 @@ import express from "express"
 import helmet from "helmet"
 import errorMiddleware from "./middlewares/error.middleware.js";
 import cors from "cors"
-import { PORT } from "../../DriveFlow/backend/config/env.js";
+import { PORT } from "./config/env.js";
 import { test } from "./test.js";
 import seedTerrain from "./scripts/seed.js";
 import seedDatabase from "./scripts/seed.js";
@@ -15,10 +15,16 @@ import testimonialRouter from "./routes/testimonials.routes.js";
 import usersRouter from "./routes/users.routes.js";
 import agencyRouter from "./routes/agency.routes.js";
 import notificationsRouter from "./routes/notifications.routes.js";
-
+import {createServer} from "http"
+import { initializeSocket } from "./socket/socket.js";
+import dashboardRouter from "./routes/dashboard.routes.js";
 
 
 const app = express();
+
+const server = createServer(app)
+
+initializeSocket(server);
 
 app.use(helmet())
 
@@ -41,6 +47,7 @@ app.use('/api/v1/testimonials', testimonialRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/agency', agencyRouter);
 app.use('/api/v1/notifications', notificationsRouter);
+app.use('/api/v1/dashboard', dashboardRouter)
 
 app.use(errorMiddleware);
 
@@ -48,7 +55,7 @@ const startServer = async() => {
 
     try{
         console.log("Trying to connect to database : ");
-        app.listen(PORT, async()=>{
+        server.listen(PORT, async()=>{
             console.log(`App running on : http://localhost:${PORT}`);
             await test();
         });

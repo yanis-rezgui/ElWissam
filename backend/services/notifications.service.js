@@ -1,4 +1,6 @@
 import prisma from "../config/prisma.js";
+import { getIo } from "../socket/socket.js";
+
 
 export const notifyAdmins = async ({
     title,
@@ -15,12 +17,28 @@ export const notifyAdmins = async ({
         }
     });
 
-    await prisma.notification.createMany({
+    if (admins.length === 0) {
+        return;
+    }
+
+    const notifications = await prisma.notification.createManyAndReturn({
         data: admins.map((admin) => ({
             title,
             message,
             type,
             userId: admin.id
         }))
+    });
+
+    // Envoyer les notifications en temps réel
+    const io = getIo();
+
+    notifications.forEach((notification) => {
+
+        io.to("admins").emit(
+            "notification:new",
+            notification
+        );
+
     });
 };
