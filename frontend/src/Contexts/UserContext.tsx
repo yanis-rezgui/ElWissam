@@ -108,6 +108,7 @@ export const UserProvider = ({children} : {children : React.ReactNode}) => {
     }
 
     useEffect(()=>{
+        if(!token || !user) return
         getUser() 
     }, [])
 

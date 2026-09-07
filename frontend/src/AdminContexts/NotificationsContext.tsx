@@ -518,7 +518,7 @@ export const NotificationsProvider = ({
 
         useEffect(() => {
 
-        if (!token) {
+        if (!token || !user) {
             return;
         }
 

@@ -5,7 +5,7 @@ import isAdmin from "../middlewares/admin.middleware.js";
 
 const testimonialRouter = new Router();
 
-testimonialRouter.post('/', getTestimonialsClient);
+testimonialRouter.get('/', getTestimonialsClient);
 
 testimonialRouter.post('/all',authorize, isAdmin, getAllTestimonials);
 

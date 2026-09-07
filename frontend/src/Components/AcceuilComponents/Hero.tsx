@@ -25,8 +25,8 @@ const Hero = () => {
     return (
         <div
             id="home"
-            style={{ backgroundImage: "url('hero2.jpeg')" }}
-            className="bg-cover bg-center w-full flex items-center justify-center h-[600px] max-[750px]:h-[700px]"
+            style={{ backgroundImage: "url('hero4.jpeg')" }}
+            className="bg-cover bg-center w-full flex items-center justify-center h-[750px] max-[750px]:h-[700px]"
         >
 
             <div
@@ -41,7 +41,7 @@ const Hero = () => {
             >
 
                 {/* TITRE */}
-                <motion.p
+                <motion.h1
                     initial={{ opacity: 0, y: -30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -49,18 +49,18 @@ const Hero = () => {
                         ease: "easeOut",
                     }}
                     className="
-                        mt-10 text-white font-black text-[2em]
+                        mt-15 text-white font-black text-[2em]
                         font-['Playfair_Display']
                         text-center leading-10
                         max-[450px]:text-[1.5em]
                     "
                 >
                     Votre projet immobilier, notre engagement.
-                </motion.p>
+                </motion.h1>
 
 
                 {/* DESCRIPTION */}
-                <motion.p
+                <motion.h2
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -81,7 +81,7 @@ const Hero = () => {
                     dans chacune de vos démarches. Découvrez une sélection de
                     biens soigneusement proposés et bénéficiez d'un accompagnement
                     pensé pour vous aider à faire le bon choix, en toute confiance.
-                </motion.p>
+                </motion.h2>
 
 
                 {/* STATISTIQUES */}
@@ -116,9 +116,9 @@ const Hero = () => {
                                 border-l-3 border-l-white pl-2
                             "
                         >
-                            <p className="font-bold">
+                            <div className="font-bold">
                                 <Counter end={s.value} />
-                            </p>
+                            </div>
 
                             <p className="text-[15px] font-[600]">
                                 {s.label.toUpperCase()}

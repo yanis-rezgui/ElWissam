@@ -134,6 +134,7 @@ export const AuthProvider = ({children} : {children : React.ReactNode}) => {
             localStorage.removeItem('currentUser');
             setUser(null);
             setToken(null);
+            setShowSignOut(false)
         }catch(err){
             console.error(err);
 

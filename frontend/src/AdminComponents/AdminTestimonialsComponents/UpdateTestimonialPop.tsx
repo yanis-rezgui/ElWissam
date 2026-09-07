@@ -154,10 +154,10 @@ const UpdateTestimonialPop = () => {
                     w-full cursor-pointer transition-opacity duration-200 hover:opacity-80
                     active:opacity-60 py-2 rounded-[5px] mt-5
                     "
-                        disabled={loadingUpdateTestimonial}
+                        disabled={loadingUpdateTestimonial === true}
                         onClick={handleCreate}
                         >
-                            {loadingUpdateTestimonial ? "Modification...":  "Modifier"}
+                            {loadingUpdateTestimonial === true ? "Modification...":  "Modifier"}
                         </button>
     
                     </div>
