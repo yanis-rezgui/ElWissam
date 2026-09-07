@@ -19,9 +19,13 @@ export const getCurrentUser = async(req , res , next) => {
             where : {
                 id : user.id
             },
-            include : {
-                favoris : true
+            include: {
+        favoris: {
+            include: {
+                images: true
             }
+        }
+    }
         })
 
         const userResponse = {

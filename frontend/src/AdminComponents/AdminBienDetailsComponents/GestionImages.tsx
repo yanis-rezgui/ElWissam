@@ -1,8 +1,9 @@
 import { memo, useRef, useState } from "react";
+import type { BienImage } from "../../Types/Types";
 
 interface GestionImagesProps {
-    oldImages: string[];
-    setOldImages: (images: string[]) => void;
+    oldImages: BienImage[];
+    setOldImages: (images: BienImage[]) => void;
     newImages: File[];
     setNewImages: (files: File[]) => void;
 }
@@ -58,7 +59,7 @@ const GestionImages = ({ oldImages, setOldImages, newImages, setNewImages }: Ges
             <div className="flex flex-wrap gap-3 mt-2">
                 {oldImages.map((img, i) => (
                     <div key={`old-${i}`} className="relative w-[100px] h-[100px]">
-                        <img src={img} alt="" className="w-full h-full object-cover rounded-[5px] border border-gray-300" />
+                        <img src={img.url} alt="" className="w-full h-full object-cover rounded-[5px] border border-gray-300" />
                         <button
                             type="button"
                             onClick={() => removeOldImage(i)}

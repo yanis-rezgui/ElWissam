@@ -69,7 +69,12 @@ const AdminBienDetails = () => {
         formData.append("service", modifBien.service);
         formData.append("features", JSON.stringify(modifBien.features || []));
         formData.append("localisationMap", modifBien.localisationMap || "");
-        formData.append("oldImages", JSON.stringify(modifBien.images || []));
+        formData.append(
+    "existingImageIds",
+    JSON.stringify(
+        (modifBien.images || []).map((image) => image.id)
+    )
+);
 
         newImages.forEach((file) => formData.append("images", file));
 

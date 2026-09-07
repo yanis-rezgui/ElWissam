@@ -59,7 +59,7 @@ export const AdminVisitesProvider = ({children} : {children : React.ReactNode}) 
     const [loadingDemandeVsites, setLoadingDemandeVsites] = useState<boolean>(false);
     const [msg, setMsg] = useState<string | null>(null);
 
-    const {token} = useAuthContext();
+    const {token, user} = useAuthContext();
 
     const [search, setSearch] = useState<string>(()=>{
 
@@ -303,7 +303,7 @@ const [loadingVisitesStats, setLoadingVisitesStats] =
 };
 
     useEffect(() => {
-    if (!token) return;
+    if (!token || user?.role !== "ADMIN") return;
 
     getVisites();
 }, [page, limit, search, statut]);
@@ -316,7 +316,7 @@ const [loadingVisitesStats, setLoadingVisitesStats] =
 
 
 useEffect(() => {
-    if (!token) return;
+    if (!token || user?.role !== "ADMIN") return;
 
     getVisitesStats();
 }, []);

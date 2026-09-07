@@ -1,90 +1,127 @@
-import  { memo, useState } from "react"
+import { memo, useState } from "react";
 import { useBiensContext } from "../../Contexts/BiensContext";
 import Galerie from "./Galerie";
-
+import { ChevronLeft, ChevronRight, Expand, MapPin } from "lucide-react";
 
 const DetailsHero = () => {
+    const { currentBien } = useBiensContext();
+    const [openGalerie, setOpenGalerie] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const {currentBien} = useBiensContext();
-    const [openGalerie, setOpenGalerie] = useState<boolean>(false);
+    if (!currentBien) return null;
 
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const images = currentBien.images;
 
-    const slideLeft = () => {
+    const slideLeft = () =>
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
-        if( currentIndex - 1 < 0){
-            setCurrentIndex(((currentBien?.images.length || 1) - 1) || 0)
-        }else{
-            setCurrentIndex(prev => prev - 1)
-        }
-    }
+    const slideRight = () =>
+        setCurrentIndex((prev) => (prev + 1) % images.length);
 
-    const slideRight = () => {
-
-        if(currentIndex + 1 >= (currentBien?.images.length || 1)){
-            setCurrentIndex(0)
-        }else{
-            setCurrentIndex(prev => prev + 1)
-        }
-    }
-
-    return(
+    return (
         <>
-           <div className="w-full bg-[#222344] flex flex-col items-center">
-               <p className="text-gray-50 text-[1.7em] font-bold mt-10">{currentBien?.nom}</p>
-                <p className="mt-5 text-gray-50 text-[1.3em] font-[600] underline">Galerie d'images</p>
+            <div className="w-full bg-[#222344] flex flex-col items-center px-4 pt-10 pb-12">
 
-               <div className="flex flex-col items-center gap-1 mt-5">
-                <div className="flex fex-row items-center gap-1">
-                    <i onClick={slideLeft}
-                     className="fa-solid fa-chevron-left
-                     text-gray-50 text-[2em] font-bold cursor-pointer transition-opacity duration-200 
-                     hover:opacity-80 active:opacity-60
-                     "></i>
-                    <img src={currentBien?.images[currentIndex]} alt="" 
-                    className="w-[500px] h-[500px] object-contain"
-                    />
-                    <i 
-                    onClick={slideRight}
-                    className="fa-solid fa-chevron-right
-                     text-gray-50 text-[2em] font-bold cursor-pointer transition-opacity duration-200 
-                     hover:opacity-80 active:opacity-60
-                    "></i>
+                {/* EN-TÊTE */}
+                <div className="flex flex-col items-center text-center gap-2 max-w-[600px]">
+                    <span className="text-[12px] font-semibold tracking-wide uppercase text-[#cdad7d]">
+                        {currentBien.service === "LOCATION" ? "À louer" : "À vendre"}
+                    </span>
+                    <p className="text-gray-50 text-[1.8em] font-bold leading-tight">
+                        {currentBien.nom}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-gray-300 text-[14px]">
+                        <MapPin size={15} className="text-[#cdad7d]" />
+                        {currentBien.localisation}
+                    </div>
                 </div>
-                <p className="text-[1.2em] font-bold text-gray-50">
-                   {currentIndex + 1}/{currentBien?.images.length}
-                </p>
-               </div>
 
-               <div className="flex flex-wrap items-center gap-2 mt-5 ">
-                {currentBien?.images.map((im, i)=>{
-                    return(
-                        <img src={im} alt="" 
-                        className="w-[50px] h-[50px] object-cover cursor-pointer transition-opacity duration-200 
-                     hover:opacity-80 active:opacity-60"
-                        style={{border : currentIndex === i ? "2px solid lightgray" :"none",
-                            padding : currentIndex === i ? "2px" : "none",
-                            borderRadius : "3px"
-                        }}
-                        onClick={()=>setCurrentIndex(i)}
+                {/* CAROUSEL */}
+                <div className="relative flex items-center justify-center mt-8 w-full max-w-[720px]">
+                    {images.length > 1 && (
+                        <button
+                            onClick={slideLeft}
+                            aria-label="Image précédente"
+                            className="absolute left-2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm
+                            flex items-center justify-center text-white transition-all duration-200
+                            hover:bg-white/20 active:scale-90"
+                        >
+                            <ChevronLeft size={22} />
+                        </button>
+                    )}
+
+                    <div className="w-full aspect-[4/3] max-h-[440px] rounded-2xl overflow-hidden bg-black/20
+                    flex items-center justify-center border border-white/10 shadow-2xl">
+                        <img
+                            src={images[currentIndex]?.url}
+                            alt={currentBien.nom}
+                            className="w-full h-full object-cover"
                         />
-                    )
-                })}
-               </div>
+                    </div>
 
-               <button className="text-[#222344] bg-gray-50 font-bold text-[15px] p-2 rounded-[5px] mt-7
-               mb-10 transition-opacity duration-200 hover:opacity-80 active:opacity-60
-               "
-               onClick={()=>setOpenGalerie(true)}
-               >
-                Ouvrir la Galerie en Détails
-               </button>
-           </div>
+                    {images.length > 1 && (
+                        <button
+                            onClick={slideRight}
+                            aria-label="Image suivante"
+                            className="absolute right-2 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm
+                            flex items-center justify-center text-white transition-all duration-200
+                            hover:bg-white/20 active:scale-90"
+                        >
+                            <ChevronRight size={22} />
+                        </button>
+                    )}
 
-           {openGalerie && <Galerie setShowPop={setOpenGalerie} images={currentBien!.images}/>}
+                    {images.length > 0 && (
+                        <span className="absolute bottom-3 right-3 text-[12px] font-semibold text-white
+                        bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                            {currentIndex + 1}/{images.length}
+                        </span>
+                    )}
+                </div>
 
-           </>
-    )
-}
+                {/* THUMBNAILS */}
+                {images.length > 1 && (
+                    <div className="flex flex-wrap justify-center items-center gap-2.5 mt-5 max-w-[700px]">
+                        {images.map((im, i) => (
+                            <button
+                                key={im.id}
+                                onClick={() => setCurrentIndex(i)}
+                                aria-label={`Image ${i + 1}`}
+                                className={`w-[56px] h-[56px] rounded-lg overflow-hidden shrink-0
+                                transition-all duration-200
+                                ${currentIndex === i
+                                    ? "ring-2 ring-[#cdad7d] opacity-100"
+                                    : "opacity-60 hover:opacity-90"}`}
+                            >
+                                <img src={im.url} alt="" className="w-full h-full object-cover" />
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* CTA GALERIE */}
+                {images.length > 0 && (
+                    <button
+                        onClick={() => setOpenGalerie(true)}
+                        className="flex items-center gap-2 text-[#222344] bg-gray-50 font-semibold text-[14px]
+                        py-2.5 px-5 rounded-full mt-7 transition-all duration-200
+                        hover:bg-[#cdad7d] active:scale-95"
+                    >
+                        <Expand size={15} />
+                        Voir toutes les photos
+                    </button>
+                )}
+            </div>
+
+            {openGalerie && (
+                <Galerie
+                    setShowPop={setOpenGalerie}
+                    images={images}
+                    initialIndex={currentIndex}
+                />
+            )}
+        </>
+    );
+};
 
 export default memo(DetailsHero);

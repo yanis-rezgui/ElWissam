@@ -1,43 +1,109 @@
-import { memo, useState } from "react"
+import { memo, useEffect, useState } from "react";
+import type { BienImage } from "../../Types/Types";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
+const Galerie = ({
+    setShowPop,
+    images,
+    initialIndex = 0,
+}: {
+    setShowPop: (b: boolean) => void;
+    images: BienImage[];
+    initialIndex?: number;
+}) => {
+    const [currentImg, setCurrentImg] = useState(initialIndex);
 
+    const slideLeft = () =>
+        setCurrentImg((prev) => (prev - 1 + images.length) % images.length);
 
+    const slideRight = () =>
+        setCurrentImg((prev) => (prev + 1) % images.length);
 
-const Galerie = ({setShowPop, images} : {setShowPop : (b : boolean)=>void, images : string[] }) => {
+    // navigation clavier (flèches + Echap)
+    useEffect(() => {
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") slideLeft();
+            if (e.key === "ArrowRight") slideRight();
+            if (e.key === "Escape") setShowPop(false);
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [images.length]);
 
-    const [currentImg, setCurrentImg] = useState(0);
-    return(
-         <div onClick={()=>setShowPop(false)} className="fixed inset-0 bg-black/40  p-10 max-[600px]:px-1 flex justify-center z-50">
-    
-               <div className="flex flex-col relative justify-center items-center shadow-2xl gap-2  w-full h-full bg-gray-50 rounded-[20px] p-5 max-[600px]:px-1" onClick={(e) => e.stopPropagation()}>
+    return (
+        <div
+            onClick={() => setShowPop(false)}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm p-6 max-[600px]:p-2
+            flex justify-center items-center z-50"
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="relative flex flex-col items-center gap-4 w-full h-full max-w-[1100px] justify-center"
+            >
+                <button
+                    onClick={() => setShowPop(false)}
+                    aria-label="Fermer la galerie"
+                    className="absolute top-0 right-0 w-10 h-10 rounded-full bg-white/10 text-white
+                    flex items-center justify-center transition-all duration-200
+                    hover:bg-white/20 active:scale-90"
+                >
+                    <X size={20} />
+                </button>
 
-                <p className="text-[2em] font-bold underline">La Galerie</p>
-                <div className="absolute top-2 right-4 cursor-pointer transition-opacity duration-200 hover:opacity-80 active:opacity-60 text-[2em]"
-                onClick={()=>setShowPop(false)}
-                > &times;</div>
-                  <img src={images[currentImg]} 
-                  className="w-[1000px] object-contain h-[500px]  max-[1100px]:w-[700px]   max-[850px]:w-[500px] max-[850px]:h-[300px]  max-[550px]:w-[300px] max-[550px]:h-[300px]"
-                  alt="" />
+                <p className="text-white text-[1.4em] font-bold text-center">La galerie</p>
 
-                                  <p className="text-[1.2em] font-bold ">
-                   {currentImg + 1}/{images.length}
+                <div className="relative flex items-center justify-center w-full">
+                    <button
+                        onClick={slideLeft}
+                        aria-label="Image précédente"
+                        className="absolute left-1 z-10 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm
+                        text-white flex items-center justify-center transition-all duration-200
+                        hover:bg-white/20 active:scale-90"
+                    >
+                        <ChevronLeft size={22} />
+                    </button>
+
+                    <img
+                        src={images[currentImg].url}
+                        className="max-w-[900px] w-full object-contain h-[500px] rounded-xl
+                        max-[850px]:h-[350px] max-[550px]:h-[280px]"
+                        alt=""
+                    />
+
+                    <button
+                        onClick={slideRight}
+                        aria-label="Image suivante"
+                        className="absolute right-1 z-10 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm
+                        text-white flex items-center justify-center transition-all duration-200
+                        hover:bg-white/20 active:scale-90"
+                    >
+                        <ChevronRight size={22} />
+                    </button>
+                </div>
+
+                <p className="text-[14px] font-semibold text-gray-300">
+                    {currentImg + 1}/{images.length}
                 </p>
 
-                  <div className="flex flex-wrap justify-center items-center gap-5 mt-5">
-                    {images.map((img, index)=>{
-                        return(
-                            <img src={images[index]}
-                            style={{border : index === currentImg ? "2px solid gray" : "none",
-                                padding : index === currentImg ? "3px" : ""
-                            }}
-                            className="h-[70px] w-[70px] cursor-pointer transition-opacity duration-200 hover:opacity-80 active:opacity-6O"
-                            onClick={()=>setCurrentImg(index)} alt="" />
-                        )
-                    })}
-                  </div>
+                <div className="flex flex-wrap justify-center items-center gap-2 max-w-[700px]">
+                    {images.map((img, index) => (
+                        <button
+                            key={img.id}
+                            onClick={() => setCurrentImg(index)}
+                            aria-label={`Image ${index + 1}`}
+                            className={`w-[60px] h-[60px] rounded-lg overflow-hidden shrink-0
+                            transition-all duration-200
+                            ${index === currentImg
+                                ? "ring-2 ring-[#cdad7d] opacity-100"
+                                : "opacity-50 hover:opacity-80"}`}
+                        >
+                            <img src={img.url} className="w-full h-full object-cover" alt="" />
+                        </button>
+                    ))}
                 </div>
-                </div>
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 export default memo(Galerie);

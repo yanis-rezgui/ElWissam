@@ -78,7 +78,7 @@ model Bien {
 
 
 
-  images      String[]
+  images      BienImage[]
   demandes    DemandeVisite[]
 
   favoriPar User[]
@@ -88,6 +88,21 @@ model Bien {
   @@index([service])
   @@index([localisation])
 }
+
+model BienImage {
+  id        String   @id @default(uuid())
+
+  url       String
+  publicId  String
+
+  bienId    String
+  bien      Bien     @relation(fields: [bienId],references: [id],onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([bienId])
+}
+
 
 model DemandeVisite {
   id             String          @id @default(uuid())

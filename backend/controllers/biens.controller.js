@@ -90,6 +90,9 @@ export const getBiens = async (req, res, next) => {
             skip,
 
             take: pageLimit,
+            include : {
+                images : true
+            },
 
             orderBy: [
                 {
@@ -144,6 +147,9 @@ export const getBien = async(req , res , next) => {
         const bien = await prisma.bien.findUnique({
             where : {
                 id : bienId
+            },
+            include : {
+                images : true
             }
         });
 

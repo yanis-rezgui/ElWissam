@@ -1,6 +1,10 @@
 import { cloudinary } from "../config/env.js";
 import prisma from "../config/prisma.js";
 import { notifyAdmins } from "../services/notifications.service.js";
+import {
+    uploadImage,
+    deleteImage
+} from "../services/cloudinary.service.js";
 
 
 export const updateBien = async (req, res, next) => {
@@ -277,7 +281,138 @@ export const updateBien = async (req, res, next) => {
         }
 
 
-        // =========================
+     
+
+
+      
+// =========================
+// IMAGES
+// =========================
+
+// Récupérer les images actuelles du bien
+const currentImages = await prisma.bienImage.findMany({
+    where: {
+        bienId: bienId
+    }
+});
+
+
+// ==========================================
+// IMAGES EXISTANTES CONSERVEES
+// ==========================================
+
+let existingImageIds = [];
+
+if (req.body.existingImageIds !== undefined) {
+
+    try {
+
+        existingImageIds =
+            typeof req.body.existingImageIds === "string"
+                ? JSON.parse(req.body.existingImageIds)
+                : req.body.existingImageIds;
+
+    } catch (error) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Impossible de lire les images existantes"
+        });
+
+    }
+
+
+    if (!Array.isArray(existingImageIds)) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Le format des images existantes est invalide"
+        });
+
+    }
+
+
+    if (
+        !existingImageIds.every(
+            (id) => typeof id === "string"
+        )
+    ) {
+
+        return res.status(400).json({
+            success: false,
+            message: "Les identifiants des images sont invalides"
+        });
+
+    }
+
+}
+
+
+// ==========================================
+// IMAGES SUPPRIMEES
+// ==========================================
+
+const imagesToDelete = currentImages.filter(
+    (image) =>
+        !existingImageIds.includes(image.id)
+);
+
+
+// ==========================================
+// SUPPRESSION CLOUDINARY + DATABASE
+// ==========================================
+
+if (imagesToDelete.length > 0) {
+
+    for (const image of imagesToDelete) {
+
+        // Supprimer de Cloudinary
+        await deleteImage(image.publicId);
+
+        // Supprimer de PostgreSQL
+        await prisma.bienImage.delete({
+            where: {
+                id: image.id
+            }
+        });
+
+    }
+
+}
+
+
+// ==========================================
+// NOUVELLES IMAGES
+// ==========================================
+
+if (
+    req.files &&
+    Array.isArray(req.files) &&
+    req.files.length > 0
+) {
+
+    const uploadedImages = await Promise.all(
+        req.files.map(uploadImage)
+    );
+
+
+    await prisma.bienImage.createMany({
+
+        data: uploadedImages.map((image) => ({
+
+            url: image.url,
+
+            publicId: image.publicId,
+
+            bienId: bienId
+
+        }))
+
+    });
+
+}
+
+           // =========================
         // AUCUNE MODIFICATION
         // =========================
 
@@ -287,91 +422,6 @@ export const updateBien = async (req, res, next) => {
                 message: "Aucune modification fournie"
             });
         }
-
-
-      
-// =========================
-// IMAGES
-// =========================
-
-let finalImages = bien.images;
-
-// Anciennes images conservées envoyées depuis le front
-if (req.body.oldImages !== undefined) {
-    try {
-        const oldImages = JSON.parse(req.body.oldImages);
-
-        if (!Array.isArray(oldImages)) {
-            return res.status(400).json({
-                success: false,
-                message: "Le format des anciennes images est invalide"
-            });
-        }
-
-        if (!oldImages.every(image => typeof image === "string")) {
-            return res.status(400).json({
-                success: false,
-                message: "Les anciennes images sont invalides"
-            });
-        }
-
-        finalImages = oldImages;
-
-    } catch (error) {
-        return res.status(400).json({
-            success: false,
-            message: "Impossible de lire les anciennes images"
-        });
-    }
-}
-
-
-// Nouvelles images uploadées
-if (
-    req.files &&
-    Array.isArray(req.files) &&
-    req.files.length > 0
-) {
-    const uploadPromises = req.files.map((file) => {
-        return new Promise((resolve, reject) => {
-
-            const stream = cloudinary.uploader.upload_stream(
-                {
-                    folder: "Immob"
-                },
-                (error, result) => {
-
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(result.secure_url);
-                    }
-
-                }
-            );
-
-            stream.end(file.buffer);
-        });
-    });
-
-    const results = await Promise.all(uploadPromises);
-
-    finalImages = [
-        ...finalImages,
-        ...results
-    ];
-}
-
-
-// Toujours mettre à jour images si oldImages
-// ou de nouvelles images ont été envoyées
-if (
-    req.body.oldImages !== undefined ||
-    (req.files && req.files.length > 0)
-) {
-    updates.images = finalImages;
-}
- 
             
         const oldStatus = bien.statut;
 
@@ -682,47 +732,22 @@ export const addBien = async (req, res, next) => {
                     : localisationMap.trim();
         }
 
+        //=========
+        //IMAGES
 
-        // =========================
-        // IMAGES
-        // =========================
+let uploadedImages = [];
 
-        let imageUrls = [];
+if (
+    req.files &&
+    Array.isArray(req.files) &&
+    req.files.length > 0
+) {
 
-        if (
-            req.files &&
-            Array.isArray(req.files) &&
-            req.files.length > 0
-        ) {
+    uploadedImages = await Promise.all(
+        req.files.map(uploadImage)
+    );
 
-            const uploadPromises = req.files.map(
-                (file) =>
-                    new Promise((resolve, reject) => {
-
-                        const stream =
-                            cloudinary.uploader.upload_stream(
-                                {
-                                    folder: "Immob"
-                                },
-                                (error, result) => {
-
-                                    if (error) {
-                                        reject(error);
-                                    } else {
-                                        resolve(result.secure_url);
-                                    }
-
-                                }
-                            );
-
-                        stream.end(file.buffer);
-                    })
-            );
-
-            imageUrls = await Promise.all(uploadPromises);
-        }
-
-        newBien.images = imageUrls;
+}
 
 
         // =========================
@@ -730,9 +755,25 @@ export const addBien = async (req, res, next) => {
         // =========================
 
         const createdBien = await prisma.bien.create({
-            data: newBien
-        });
 
+            data: {
+
+                ...newBien,
+
+                images: {
+                    create: uploadedImages.map((image) => ({
+                        url: image.url,
+                        publicId: image.publicId
+                    }))
+                }
+
+            },
+
+            include: {
+                images: true
+            }
+
+        });
 
         // =========================
         // RESPONSE
@@ -757,39 +798,86 @@ export const addBien = async (req, res, next) => {
 
 
 
-export const deleteBien = async(req, res, next) => {
+export const deleteBien = async (req, res, next) => {
 
-    try{
+    try {
 
         const bienId = req.params.id;
 
+
+        // =========================
+        // RECUPERER LE BIEN
+        // =========================
+
         const bien = await prisma.bien.findUnique({
-            where : {
-                id : bienId
+            where: {
+                id: bienId
+            },
+            include: {
+                images: true
             }
         });
 
-        if(!bien){
+
+        if (!bien) {
 
             return res.status(404).json({
                 success: false,
-                message: "Error bien not found"
-            }) ;
+                message: "Bien introuvable"
+            });
+
         }
 
+
+        // =========================
+        // SUPPRIMER LES IMAGES
+        // DE CLOUDINARY
+        // =========================
+
+        if (bien.images.length > 0) {
+
+            for (const image of bien.images) {
+
+                await deleteImage(image.publicId);
+
+            }
+
+        }
+
+
+        // =========================
+        // SUPPRIMER LE BIEN
+        // =========================
+        // Grâce à onDelete: Cascade,
+        // les BienImage seront également
+        // supprimées de PostgreSQL.
+
         const deletedBien = await prisma.bien.delete({
-            where : {
-                id : bienId
+            where: {
+                id: bienId
             }
         });
 
-        return res.status(200).json({
-            success : true,
-            message : "Bien deleted successfully",
-            data : deletedBien.id
-        })
 
-    }catch(err){
-        next(err);
+        // =========================
+        // RESPONSE
+        // =========================
+
+        return res.status(200).json({
+
+            success: true,
+
+            message: "Bien supprimé avec succès",
+
+            data: deletedBien.id
+
+        });
+
+
+    } catch (error) {
+
+        next(error);
+
     }
-}
+
+};

@@ -82,7 +82,7 @@ const AdminBiensTable = () => {
                                     >
                                         <td className="p-3 flex flex-row items-center gap-3">
                                             <img
-                                                src={bien.images?.[0]}
+                                                src={bien.images?.[0].url}
                                                 alt={bien.nom}
                                                 className="w-[50px] h-[50px] rounded-[8px] object-cover bg-gray-100"
                                             />
@@ -141,7 +141,7 @@ const AdminBiensTable = () => {
                                 className="bg-white rounded-[10px] shadow-2xl p-3 flex flex-row gap-3"
                             >
                                 <img
-                                    src={bien.images?.[0]}
+                                    src={bien.images?.[0].url}
                                     alt={bien.nom}
                                     className="w-[70px] h-[70px] rounded-[8px] object-cover bg-gray-100 flex-shrink-0"
                                 />

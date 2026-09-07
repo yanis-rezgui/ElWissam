@@ -139,7 +139,7 @@ export const DashboardProvider = ({
     children: React.ReactNode
 }) => {
 
-    const { token } = useAuthContext();
+    const { token, user } = useAuthContext();
 
     const [dashboardStats, setDashboardStats] =
         useState<DashboardStats>(emptyStats);
@@ -207,7 +207,7 @@ export const DashboardProvider = ({
 
     useEffect(() => {
 
-        if (!token) return;
+        if (!token || user?.role !== "ADMIN") return;
 
         getDashboardStats();
 

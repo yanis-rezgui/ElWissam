@@ -106,7 +106,7 @@ export const NotificationsProvider = ({
     children: React.ReactNode
 }) => {
 
-    const { token } = useAuthContext();
+    const { token, user } = useAuthContext();
 
 
     // =====================================================
@@ -613,7 +613,7 @@ export const NotificationsProvider = ({
 
     useEffect(() => {
 
-        if (!token) return;
+        if (!token || user?.role !== "ADMIN") return;
 
         getNotifications();
 
@@ -631,7 +631,7 @@ export const NotificationsProvider = ({
 
     useEffect(() => {
 
-        if (!token) return;
+        if (!token || user?.role !== "ADMIN") return;
 
         getNotificationsStats();
 

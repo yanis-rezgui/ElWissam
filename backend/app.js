@@ -18,6 +18,7 @@ import notificationsRouter from "./routes/notifications.routes.js";
 import {createServer} from "http"
 import { initializeSocket } from "./socket/socket.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
+import favorisRouter from "./routes/favoris.routes.js";
 
 
 const app = express();
@@ -47,7 +48,8 @@ app.use('/api/v1/testimonials', testimonialRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/agency', agencyRouter);
 app.use('/api/v1/notifications', notificationsRouter);
-app.use('/api/v1/dashboard', dashboardRouter)
+app.use('/api/v1/dashboard', dashboardRouter);
+app.use('/api/v1/favoris', favorisRouter);
 
 app.use(errorMiddleware);
 

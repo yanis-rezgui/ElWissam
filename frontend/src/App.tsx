@@ -1,7 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Header from './Components/BaseComponents/Header'
+
 import Acceuil from './Pages/Acceuil'
 import { BiensProvider } from './Contexts/BiensContext'
 import Biens from './Pages/Biens' 
@@ -34,6 +34,8 @@ import Notifications from './AdminPages/Notifications'
 import { NotificationsProvider } from './AdminContexts/NotificationsContext'
 import { DashboardProvider } from './AdminContexts/DashboardContext'
 import Guide from './AdminPages/Guide'
+import { FavoritesProvider } from './Contexts/FavoritesContext'
+import Favorites from './Pages/Favorites'
 
 
 function App() {
@@ -52,6 +54,7 @@ function App() {
                     <AgencyAdminProvider>
                       <NotificationsProvider>
                         <DashboardProvider>
+                          <FavoritesProvider>
       <Routes>
 
         <Route element={
@@ -62,7 +65,7 @@ function App() {
 
         <Route path="/" element={
           <>
-            <Header/>
+            
             <Acceuil/> 
           </>
         }/>
@@ -70,37 +73,41 @@ function App() {
 
         <Route path='/biens' element={
           <>
-             <Header/>Gérez vos informations personnelles, la sécurité de votre compte et vos préférences depuis un seul espace. Gardez votre profil à jour afin de profiter d’une expérience d’administration simple, sécurisée et adaptée à vos besoins.
+             
              <Biens/>
           </>
         }/>
 
         <Route path='/bien/:id' element={
           <>
-            <Header/>
+            
             <BienDetails/>
           </>
         }/>
 
         <Route path='/profile' element={
           <>
-            <Header/>
+            
             <Profile/>
           </>
         }/>
 
         <Route path='/services' element={
           <>
-            <Header/>
+            
             <Services/>
           </>
         }/>
 
         <Route path="/contact" element={
           <>
-            <Header/>
+            
             <Contact/>
           </>
+        }/>
+
+        <Route path='/favoris' element={
+          <Favorites/>
         }/>
         </Route>
 
@@ -125,6 +132,7 @@ function App() {
          <Route path='guide' element={<Guide/>}/>
       </Route>
       </Routes>
+      </FavoritesProvider>
       </DashboardProvider>
       </NotificationsProvider>
       </AgencyAdminProvider>

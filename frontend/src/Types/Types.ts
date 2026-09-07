@@ -49,6 +49,24 @@ export interface User {
 
 
 // ============================================================
+// BIEN IMAGE
+// ============================================================
+
+export interface BienImage {
+
+  id: string;
+
+  url: string;
+
+  publicId: string;
+
+  bienId: string;
+
+  createdAt: string;
+
+}
+
+// ============================================================
 // BIEN
 // ============================================================
 
@@ -75,7 +93,7 @@ export interface Bien {
 
   features: string[];
 
-  images: string[];
+  images: BienImage[];
 
   localisationMap: string;
 

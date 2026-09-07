@@ -44,7 +44,7 @@ export const TestimonialsAdminProvider = ({children} : {children : React.ReactNo
 
     const [loadingAllTestimonials, setLoadingAllTestimonials] = useState<boolean>(false);
     const [allTestimonials, setAllTestimonials] = useState<Testimonial[]>([]);
-    const {token} = useAuthContext();
+    const {token, user} = useAuthContext();
 
     const [msg, setMsg] = useState<string | null>(null);
     const [fullName, setFullName] = useState<string>("");
@@ -191,6 +191,7 @@ export const TestimonialsAdminProvider = ({children} : {children : React.ReactNo
     }
 
     useEffect(()=>{
+        if(!token || user?.role !== "ADMIN") return;
         getAllTestimonials();
     }, [fullName, active]);
 

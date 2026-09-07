@@ -1,5 +1,6 @@
 import  { memo } from "react"
 import { Outlet } from "react-router-dom"
+import Header from "../Components/BaseComponents/Header";
 
 
 
@@ -7,9 +8,12 @@ import { Outlet } from "react-router-dom"
 const PublicLayout = () => {
 
     return(
+        <>
+        <Header/>
         <main className="w-full pt-[60px]">
             <Outlet/>
         </main>
+        </>
     )
 }
 

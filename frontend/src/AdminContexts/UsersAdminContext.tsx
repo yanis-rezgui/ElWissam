@@ -144,7 +144,7 @@ export const UsersAdminProvider = ({
     children: React.ReactNode
 }) => {
 
-    const { token } = useAuthContext();
+    const { token, user } = useAuthContext();
 
 
     // =====================================================
@@ -573,7 +573,7 @@ export const UsersAdminProvider = ({
 
     useEffect(() => {
 
-        if (!token) return;
+        if (!token || user?.role !== "ADMIN") return;
 
         getAllUsers();
 
