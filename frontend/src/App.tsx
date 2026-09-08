@@ -37,6 +37,7 @@ import Guide from './AdminPages/Guide'
 import { FavoritesProvider } from './Contexts/FavoritesContext'
 import Favorites from './Pages/Favorites'
 import { TestimonialsProvider } from './Contexts/TestimonialsContext'
+import { ContactProvider } from './Contexts/ContactContext';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                         <DashboardProvider>
                           <FavoritesProvider>
                             <TestimonialsProvider>
+                              <ContactProvider>
       <Routes>
 
         <Route element={
@@ -134,6 +136,7 @@ function App() {
          <Route path='guide' element={<Guide/>}/>
       </Route>
       </Routes>
+      </ContactProvider>
       </TestimonialsProvider>
       </FavoritesProvider>
       </DashboardProvider>

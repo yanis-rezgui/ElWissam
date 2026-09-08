@@ -1,5 +1,6 @@
 import { memo } from "react";
 import Icon from "../../Icons/Icons";
+import { useContactContext } from "../../Contexts/ContactContext";
 
 
 
@@ -29,7 +30,24 @@ const ContactInfo = () => {
 ];
 
 
+     const {sendMessage, msg} = useContactContext();
+
     
+     const submitForm = async(e : React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        const nom = formData.get("nom") as string;
+        const email = formData.get("email") as string;
+        const telephone = formData.get("telephone") as string;
+        const objet = formData.get("objet") as string;
+        const message = formData.get("message") as string;
+
+        await sendMessage(nom, email, telephone,objet, message);
+     }
 
     return(
         <div className="w-full py-10 px-5 flex flex-row items-start text-[#172033] justify-center gap-20
@@ -69,7 +87,9 @@ const ContactInfo = () => {
             <form className="flex flex-col items-center gap-3 w-[500px] p-5 bg-white 
             shadow-2xl border-3 border-[#172033] rounded-[10px]
             max-[1100px]:w-[400px] max-[450px]:w-[350px]
-            ">
+            "
+            onSubmit={submitForm}
+            >
                 <p className="text-[#172033] text-[1.3em] font-bold">
                     Envoyez-nous un message
                 </p>
@@ -123,11 +143,11 @@ const ContactInfo = () => {
                 <label htmlFor="Object"
                 className="text-[15px] font-[600]"
                 >
-                    Object*
+                    Objet*
                 </label>
                 <input 
                 type="text" 
-                name="Object"
+                name="objet"
                 placeholder="Ex : Demande d'information"
                 className="w-full border border-gray-300 rounded-[5px] p-2 text-[15px] bg-gray-50"
                 required
@@ -147,6 +167,15 @@ const ContactInfo = () => {
                 required
                 />
             </div>
+
+            <div className="h-[30px] flex justify-center items-center text-center">
+
+               {msg &&
+                 <p className="text-[15px] text-[#172033] font-[500]">
+                    {msg}
+                 </p>
+               }
+             </div>
 
               <button className="bg-[#222344] text-gray-50 w-full py-2 rounded-[5px] cursor-pointer font-[500]
             transition-opacity duration-200 hover:opacity-80 active:opacity-60

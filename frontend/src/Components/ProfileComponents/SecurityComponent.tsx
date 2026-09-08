@@ -152,7 +152,39 @@ const SecurityComponent = () => {
 
                 {/* Password Form */}
                 <AnimatePresence initial={false}>
+ <div className="min-h-[30px] flex justify-center items-center text-center">
 
+                            <AnimatePresence mode="wait">
+
+                                {msg && (
+
+                                    <motion.p
+                                        initial={{
+                                            opacity: 0,
+                                            y: -5
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            y: 0
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            y: -5
+                                        }}
+                                        className="
+                                            text-[15px]
+                                            text-red-600
+                                            font-[500]
+                                        "
+                                    >
+                                        {msg}
+                                    </motion.p>
+
+                                )}
+
+                            </AnimatePresence>
+
+                        </div>
                     {showModify && (
 
                         <motion.div

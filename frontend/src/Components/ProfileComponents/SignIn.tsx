@@ -69,7 +69,9 @@ const SignIn = () => {
 
             <Link to="/"
             className="text-[15px] cursor-pointer text-gray-800 
-           transition-opacity duration-200 hover:opacity-80 active:opacity-60
+           transition-opa
+
+export default memo(ContactInfo)city duration-200 hover:opacity-80 active:opacity-60
            "
             >Mot de passe oublié ? </Link>
 

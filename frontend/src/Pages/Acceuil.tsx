@@ -4,6 +4,7 @@ import About from "../Components/AcceuilComponents/About";
 import Accompagnement from "../Components/AcceuilComponents/Accompagnement";
 import BiensSection from "../Components/AcceuilComponents/BiensSection";
 import Confiance from "../Components/AcceuilComponents/Confiance";
+import NosServices from "../Components/AcceuilComponents/NosServices";
 
 
 
@@ -18,6 +19,7 @@ const Acceuil = () => {
               <Accompagnement/>
               <BiensSection/>
               <Confiance/>
+              <NosServices/>
          </section>      
     )
 }

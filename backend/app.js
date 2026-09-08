@@ -19,6 +19,7 @@ import {createServer} from "http"
 import { initializeSocket } from "./socket/socket.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
 import favorisRouter from "./routes/favoris.routes.js";
+import contactRouter from "./routes/contact.routes.js";
 
 
 const app = express();
@@ -50,6 +51,7 @@ app.use('/api/v1/agency', agencyRouter);
 app.use('/api/v1/notifications', notificationsRouter);
 app.use('/api/v1/dashboard', dashboardRouter);
 app.use('/api/v1/favoris', favorisRouter);
+app.use('/api/v1/contact', contactRouter);
 
 app.use(errorMiddleware);
 

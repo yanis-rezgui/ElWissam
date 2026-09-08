@@ -46,7 +46,7 @@ const ServicesCta = () => {
         "
       >
 
-        {/* Image */}
+        {/* Image */}bg-[#222344]
         <motion.img
           initial={{
             opacity: 0,
