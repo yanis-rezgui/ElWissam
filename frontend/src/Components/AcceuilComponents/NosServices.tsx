@@ -1,9 +1,12 @@
 import { memo } from "react";
 import {motion} from "framer-motion"
 import Icon from "../../Icons/Icons";
+import { useNavigate } from "react-router-dom";
 
 
 const NosServices = () => {
+
+    const navigate = useNavigate();
 
     const services = [
     {
@@ -46,7 +49,7 @@ const NosServices = () => {
         >
 
             {/* TITRE */}
-            <motion.p
+            <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -56,10 +59,10 @@ const NosServices = () => {
                 }}
                 className="text-[2em] font-bold text-center"
             >
-                NOS BIENS IMMOBILIERS
-            </motion.p>
+                NOS SERVICES
+            </motion.h2>
 
-            <motion.p
+            <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -75,9 +78,8 @@ const NosServices = () => {
                     max-[550px]:w-[300px]
                 "
             >
-                Découvrez une sélection de biens
-                proposés par El Ahlem.
-            </motion.p>
+                Des solutions adaptées à chaque étape de votre projet immobilier.
+            </motion.h3>
 
             <div className="flex flex-wrap items-center gap-5 justify-center">
                 {services.map((s)=>{
@@ -86,16 +88,74 @@ const NosServices = () => {
                        shadow-2xl flex flex-col gap-2 transition-transform duration-200 hover:scale-105 
                        ">
                         <Icon name={s.icon} size={40}/>
-                        <p className="text-[1.2em] font-bold leading-6">
+                        <h3 className="text-[1.1em] font-bold leading-6">
                             {s.title}
-                        </p>
-                        <p className="text-[14px] leading-5">
+                        </h3>
+                        <h4 className="text-[14px] leading-5">
                             {s.description}
-                        </p>
+                        </h4>
                        </div>
                     )
                 })}
             </div>
+
+                         {/* BOUTONS */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                    duration: 0.7,
+                    delay: 0.25,
+                    ease: "easeOut"
+                }}
+                className="
+                    flex flex-row items-center gap-3 mt-5
+                    max-[450px]:mt-2
+                    max-[450px]:flex-col
+                "
+            >
+
+                <motion.button
+                    onClick={()=>navigate("/services")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                    className="
+                        bg-[#222344]
+                        text-white
+                        text-[15px]
+                        p-2
+                        cursor-pointer
+                        rounded-[5px]
+                        shadow-2xl
+                        font-[500]
+                    "
+                >
+                    En savoir plus
+                </motion.button>
+
+
+                <motion.button
+                    onClick={() => navigate("/contact")}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                    className="
+                        bg-white
+                        text-[#222344]
+                        text-[15px]
+                        p-2
+                        cursor-pointer
+                        rounded-[5px]
+                        shadow-2xl
+                        font-[500]
+                    "
+                >
+                    Contactez-nous
+                </motion.button>
+
+            </motion.div>
 
         </section>
     );

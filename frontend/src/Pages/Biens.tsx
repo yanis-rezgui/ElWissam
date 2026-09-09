@@ -9,11 +9,11 @@ const Biens = () => {
 
             <div className="flex flex-col items-center w-full bg-white border-b border-gray-200 pb-8 pt-10 px-4">
                 <h1 className="text-[2.1em] font-bold text-[#222344] text-center">
-                    Nos biens
+                    Nos Biens
                 </h1>
-                <p className="text-gray-500 mt-2 text-[15.5px] text-center max-w-[500px]">
+                <h2 className="text-gray-500 mt-2 text-[15.5px] text-center max-w-[500px]">
                     Découvrez notre sélection de biens immobiliers à vendre et à louer.
-                </p>
+                </h2>
 
                 <BiensSearch />
             </div>

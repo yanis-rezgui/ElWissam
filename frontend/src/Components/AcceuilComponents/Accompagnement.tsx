@@ -54,7 +54,7 @@ const Accompagnement = () => {
         >
 
             {/* TITRE */}
-            <motion.p
+            <motion.h2
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -67,14 +67,15 @@ const Accompagnement = () => {
                     font-bold
                     text-gray-50
                     text-center
+                    max-[600px]:text-[1.5em]
                 "
             >
-                NOTRE ACCOMPAGNEMENT
-            </motion.p>
+                Pourquoi choisir El Ahlem ?
+            </motion.h2>
 
 
             {/* DESCRIPTION */}
-            <motion.p
+            <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -93,7 +94,7 @@ const Accompagnement = () => {
             >
                 Un accompagnement pensé pour vous
                 accompagner à chaque étape de votre projet.
-            </motion.p>
+            </motion.h3>
 
 
             {/* CARTES */}
@@ -183,9 +184,9 @@ const Accompagnement = () => {
 
 
                             {/* TITRE */}
-                            <p className="text-[1.4em] font-bold">
+                            <h3 className="text-[1.4em] font-bold">
                                 {a.title}
-                            </p>
+                            </h3>
 
 
                             {/* DESCRIPTION */}

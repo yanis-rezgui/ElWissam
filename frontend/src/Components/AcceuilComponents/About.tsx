@@ -17,7 +17,7 @@ const About = () => {
         >
 
             {/* TITRE */}
-            <motion.p
+            <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -25,10 +25,10 @@ const About = () => {
                     duration: 0.7,
                     ease: "easeOut"
                 }}
-                className="text-[2em] font-bold"
+                className="text-[2em] font-bold text-center max-[600px]:text-[1.5em]"
             >
-                À propos d'El Ahlem
-            </motion.p>
+                À propos de notre agence immobilière à Alger
+            </motion.h2>
 
 
             {/* CONTENU */}
@@ -41,7 +41,7 @@ const About = () => {
             >
 
                 {/* TEXTE */}
-                <motion.p
+                <motion.h3
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
@@ -67,7 +67,7 @@ const About = () => {
                     transparent et personnalisé à chaque étape de votre projet,
                     pour vous permettre d’avancer sereinement et de concrétiser
                     vos ambitions immobilières en toute confiance.
-                </motion.p>
+                </motion.h3>
 
 
                 {/* IMAGE */}

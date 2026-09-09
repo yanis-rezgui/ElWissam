@@ -20,7 +20,7 @@ const BiensSection = () => {
         >
 
             {/* TITRE */}
-            <motion.p
+            <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -30,10 +30,10 @@ const BiensSection = () => {
                 }}
                 className="text-[2em] font-bold text-center"
             >
-                NOS BIENS IMMOBILIERS
-            </motion.p>
+                Nos biens immobiliers à Alger
+            </motion.h2>
 
-            <motion.p
+            <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -51,7 +51,7 @@ const BiensSection = () => {
             >
                 Découvrez une sélection de biens
                 proposés par El Ahlem.
-            </motion.p>
+            </motion.h3>
 
              <div className="flex flex-wrap justify-center items-center gap-5 w-full">
                  {biens.slice(0,4).map((b)=>{

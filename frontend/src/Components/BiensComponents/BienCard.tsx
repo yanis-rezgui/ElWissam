@@ -76,7 +76,7 @@ const BienCard = ({ bien }: { bien: Bien }) => {
 
             {/* CONTENU */}
             <div className="flex flex-col gap-2 p-3.5">
-                <p className="text-[16px] font-bold text-[#222344] truncate">{bien.nom}</p>
+                <h2 className="text-[16px] font-bold text-[#222344] truncate">{bien.nom}</h2>
 
                 <div className="flex items-center gap-1.5 text-[13.5px] text-gray-500">
                     <MapPin size={14} className="shrink-0 text-[#cdad7d]" />

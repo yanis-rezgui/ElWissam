@@ -38,6 +38,8 @@ import { FavoritesProvider } from './Contexts/FavoritesContext'
 import Favorites from './Pages/Favorites'
 import { TestimonialsProvider } from './Contexts/TestimonialsContext'
 import { ContactProvider } from './Contexts/ContactContext';
+import MentionsLegales from './Pages/MentionsLegales'
+import PrivacyPolicy from './Pages/PrivacyPolicy'
 
 
 function App() {
@@ -112,6 +114,14 @@ function App() {
 
         <Route path='/favoris' element={
           <Favorites/>
+        }/>
+
+        <Route path='/mentions' element={
+          <MentionsLegales/> 
+        }/>
+
+        <Route path='/privacy' element={
+          <PrivacyPolicy/>
         }/>
         </Route>
 

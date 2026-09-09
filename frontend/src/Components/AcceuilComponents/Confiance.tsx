@@ -27,7 +27,7 @@ const Confiance = () => {
         >
 
             {/* TITRE */}
-            <motion.p
+            <motion.h2
                 initial={{ opacity: 0, y: -30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -43,11 +43,11 @@ const Confiance = () => {
                 "
             >
                 ILS NOUS FONT CONFIANCE
-            </motion.p>
+            </motion.h2>
 
 
             {/* DESCRIPTION */}
-            <motion.p
+            <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -66,7 +66,7 @@ const Confiance = () => {
             >
                 Découvrez les expériences de nos clients et leur
                  satisfaction à l'issue de leur projet immobilier.
-            </motion.p>
+            </motion.h3>
 
             <div className="flex flex-wrap justify-center items-baseline gap-5 mt-5">
                 {clientTestimonials.slice(0,4).map((t)=>{

@@ -55,12 +55,12 @@ const Hero = () => {
                         max-[450px]:text-[1.5em]
                     "
                 >
-                    Votre projet immobilier, notre engagement.
+                     El Ahlem, votre agence immobilière à Alger
                 </motion.h1>
 
 
                 {/* DESCRIPTION */}
-                <motion.h2
+                <motion.h3
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -75,13 +75,12 @@ const Hero = () => {
                         max-[450px]:text-[15px]
                     "
                 >
-                    Chez El Ahlem, nous croyons que chaque projet immobilier
-                    est avant tout une histoire personnelle. C'est pourquoi
-                    nous vous accompagnons avec attention, sérieux et proximité
-                    dans chacune de vos démarches. Découvrez une sélection de
-                    biens soigneusement proposés et bénéficiez d'un accompagnement
-                    pensé pour vous aider à faire le bon choix, en toute confiance.
-                </motion.h2>
+                   El Ahlem est une agence immobilière à Alger spécialisée dans
+                    l'achat, la vente et la location de biens immobiliers.
+                    Découvrez nos appartements, villas, terrains et locaux dans
+                    plusieurs secteurs d'Alger et bénéficiez d'un accompagnement
+                    personnalisé à chaque étape de votre projet.
+                </motion.h3>
 
 
                 {/* STATISTIQUES */}
