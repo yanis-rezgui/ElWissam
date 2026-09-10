@@ -8,9 +8,9 @@ const ContactHero = () => {
              <p className="font-[600] mt-5">
                 CONTACT
              </p>
-             <p className="text-[2em] font-bold text-center">
-                Parlons de votre projet immobilier.
-             </p>
+             <h1 className="text-[2em] font-bold text-center">
+               Contactez El Ahlem, agence immobilière à Alger
+             </h1>
              <p 
              className="text-[17px] text-center font-[500] w-[700px] 
              max-[750px]:w-[500px] max-[550px]:w-[300px] max-[550px]:text-[15px]

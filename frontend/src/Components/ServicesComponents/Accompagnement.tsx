@@ -8,17 +8,18 @@ const Accompagnement = () => {
 
     return(
         <div className="flex flex-col w-full px-5 py-10 gap-10 bg-[#172033] items-center">
-            <p className="text-white text-[1.5em] font-bold text-center">
-                Un accompagnement pensé autour de vos besoins
-            </p>
+            <h2 className="text-white text-[1.5em] font-bold text-center">
+                 Un accompagnement immobilier pensé autour de vos besoins
+            </h2>
 
             <div className="flex flex-row items-center justify-center gap-20 max-[700px]:flex-col max-[700px]:gap-10">
                <p className="text-white w-[500px] text-[1.1em] max-[1100px]:w-[300px] max-[700px]:text-center">
-                Chaque projet immobilier est unique. Que vous soyez à la recherche d'un nouveau logement,
-                 que vous souhaitiez investir dans un bien ou que vous envisagiez de vendre
-                  ou de louer votre propriété, vos attentes et vos priorités sont différentes. 
-                  Chez El Ahlem, nous prenons le temps de comprendre votre projet afin
-                   de vous orienter vers les solutions les plus adaptées.
+                Chaque projet immobilier est unique. Que vous soyez à la recherche
+d'un logement à Alger, que vous souhaitiez investir dans un bien ou
+que vous envisagiez de vendre ou de louer votre propriété, vos attentes
+et vos priorités sont différentes. Chez El Ahlem, nous prenons le temps
+de comprendre votre projet afin de vous orienter vers les solutions les
+plus adaptées.
                </p>
 
                <img src="https://res.cloudinary.com/dub4fhabm/image/upload/v1788258334/85dace73-a8d5-48f3-950e-5699d3fd0ead.png"

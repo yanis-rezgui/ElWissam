@@ -1,26 +1,29 @@
 import { memo } from "react";
 import Icon from "../../Icons/Icons";
 import { useContactContext } from "../../Contexts/ContactContext";
+import { useAgencyAdminContext } from "../../AdminContexts/AgencyAdminContext";
 
 
 
 const ContactInfo = () => {
 
+    const {agency} = useAgencyAdminContext();
+
     const contactInfos = [
   {
     name: "Téléphone",
     icon: "Phone",
-    content: "+213 550 22 74 73",
+    content: agency.phone[0],
   },
   {
     name: "Email",
     icon: "Mail",
-    content: "bouraba.morad@gmail.com",
+    content: agency.email,
   },
   {
     name: "Adresse",
     icon: "MapPin",
-    content: "Birkhadem, Alger, Algérie",
+    content: agency.address,
   },
   {
     name: "Horaires",
@@ -54,9 +57,9 @@ const ContactInfo = () => {
         max-[1100px]:gap-10 max-[900px]:flex-col max-[900px]:items-center
         ">
             <div className="flex flex-col gap-2 w-[500px] max-[1100px]:w-[400px] max-[450px]:w-[350px]">
-                <p className="font-[600] text-[19px]">
-                    Échangeons ensemble
-                </p>
+                <h2 className="font-[600] text-[19px]">
+                    Échangeons sur votre projet immobilier
+                </h2>
 
                 <p className="text-[15px] leading-5.5">
                     Nous sommes disponibles pour répondre à vos questions, 
@@ -90,9 +93,9 @@ const ContactInfo = () => {
             "
             onSubmit={submitForm}
             >
-                <p className="text-[#172033] text-[1.3em] font-bold">
+                <h2 className="text-[#172033] text-[1.3em] font-bold">
                     Envoyez-nous un message
-                </p>
+                </h2>
 
                  <div className="flex flex-col gap-1 w-full mt-5">
                 <label htmlFor="nom"

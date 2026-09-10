@@ -31,7 +31,7 @@ const ServiceHero = () => {
           }}
           className="text-[2em] text-white font-bold mt-10"
         >
-          NOS SERVICES
+          Services immobiliers à Alger
         </motion.p>
 
         {/* Title */}
@@ -78,49 +78,45 @@ const ServiceHero = () => {
           }}
           className="flex flex-row items-center justify-center gap-4 mt-5"
         >
-          <motion.a
-            whileHover={{
-              scale: 1.03,
-            }}
-            whileTap={{
-              scale: 0.97,
-            }}
-            className="
-              bg-[#222344]
-              text-white
-              text-[15px]
-              p-2
-              cursor-pointer
-              rounded-[10px]
-              shadow-2xl
-              font-[500]
-            "
-            href="#services"
-          >
-            Découvrez nos services
-          </motion.a>
+           <motion.button
+                        onClick={() => navigate("/biens")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="
+                            bg-[#cdad7d]
+                            text-[#222344]
+                            text-[15px]
+                            px-4 py-2.5
+                            cursor-pointer
+                            rounded-[5px]
+                            shadow-2xl
+                            font-[600]
+                            flex items-center gap-2
+                            max-[450px]:w-full max-[450px]:justify-center
+                        "
+                    >
+                        Découvrez nos services
+                        <i className="fa-solid fa-arrow-right text-[13px]"></i>
+                    </motion.button>
 
-          <motion.button
-            whileHover={{
-              scale: 1.03,
-            }}
-            whileTap={{
-              scale: 0.97,
-            }}
-            className="
-              bg-gray-50
-              text-[#222344]
-              text-[15px]
-              p-2
-              cursor-pointer
-              rounded-[10px]
-              shadow-2xl
-              font-[500]
-            "
-            onClick={() => navigate("/biens")}
-          >
-            Découvrez nos biens
-          </motion.button>
+                    <motion.button
+                        onClick={()=>navigate("/biens")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="
+                            bg-transparent
+                            border border-white/40
+                            text-[white]
+                            text-[15px]
+                            px-4 py-2.5
+                            cursor-pointer
+                            rounded-[5px]
+                            font-[500]
+                            max-[450px]:w-full max-[450px]:text-center
+                        "
+                    >
+                        Découvrez nos biens
+                    </motion.button>
         </motion.div>
 
       </motion.div>

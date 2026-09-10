@@ -43,16 +43,16 @@ const Accompagnement2 = () => {
 
     return(
         <div className="flex flex-col w-full px-5 py-10 gap-10 bg-[#172033] items-center">
-            <p className="text-white text-[1.5em] font-bold text-center">
-                Un accompagnement à chaque étape
-            </p>
+            <h2 className="text-white text-[1.5em] font-bold text-center">
+                Un accompagnement immobilier à chaque étape
+            </h2>
 
             <p className="text-[17px] text-white font-[600] w-[700px]
              max-[750px]:w-[500px] max-[550px]:w-[300px] max-[550px]:text-[15px]
              text-center
              ">
                 Un projet immobilier peut représenter une décision importante et parfois nécessiter plusieurs démarches. 
-                <script type="module" src=""></script>Chez El Ahlem, nous cherchons à rendre ce parcours plus simple en restant à vos côtés depuis votre première prise de contact jusqu'aux dernières étapes de votre projet.
+                Chez El Ahlem, nous cherchons à rendre ce parcours plus simple en restant à vos côtés depuis votre première prise de contact jusqu'aux dernières étapes de votre projet.
             </p>
 
 

@@ -178,3 +178,20 @@ model Notification {
   @@index([userId, read])
   @@index([createdAt])
 }
+
+
+model Commune {
+  id            String   @id @default(uuid())
+  name          String
+  imageUrl      String?
+  imagePublicId String?
+
+  active        Boolean  @default(true)
+  order         Int      @default(0)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([active])
+  @@index([order])
+}

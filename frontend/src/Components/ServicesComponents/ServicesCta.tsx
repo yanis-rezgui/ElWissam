@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const ServicesCta = () => {
   const navigate = useNavigate();
@@ -9,15 +10,15 @@ const ServicesCta = () => {
     <section className="flex flex-col w-full bg-gray-100 py-16 px-5 text-[#172033] items-center">
 
       {/* Header */}
-      <motion.p
+      <motion.h1
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
         className="text-[16px] font-[600] text-center"
       >
-        VOTRE PROJET COMMENCE ICI
-      </motion.p>
+        VOTRE PROJET IMMOBILIER COMMENCE ICI
+      </motion.h1>
 
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -46,7 +47,7 @@ const ServicesCta = () => {
         "
       >
 
-        {/* Image */}bg-[#222344]
+        {/* Image */}
         <motion.img
           initial={{
             opacity: 0,
@@ -142,7 +143,7 @@ const ServicesCta = () => {
       >
 
         {/* Contact */}
-        <motion.button
+        <Link
           whileHover={{
             scale: 1.04,
           }}
@@ -163,14 +164,14 @@ const ServicesCta = () => {
             shadow-lg
             font-[500]
           "
-          onClick={() => navigate("/contact")}
+           to="/contact"
         >
           Contactez-nous
-        </motion.button>
+        </Link>
 
 
         {/* Biens */}
-        <motion.button
+        <Link
           whileHover={{
             scale: 1.04,
           }}
@@ -191,10 +192,10 @@ const ServicesCta = () => {
             shadow-lg
             font-[500]
           "
-          onClick={() => navigate("/biens")}
+         to="/biens"
         >
           Découvrez nos biens
-        </motion.button>
+        </Link>
 
       </motion.div>
 

@@ -1,20 +1,23 @@
 import { memo } from "react"
+import { useAgencyAdminContext } from "../../AdminContexts/AgencyAdminContext"
 
 
 const Localisation = () => {
 
+    const {agency} = useAgencyAdminContext();
+
     return(
         <div className="w-full py-10 px-5 flex flex-col items-center text-[#172033]">
 
-            <p className="text-[2em] font-bold">
-              Retrouvez-nous
-            </p>
+            <h2 className="text-[2em] font-bold">
+              Retrouvez notre agence immobilière à Alger
+            </h2>
 
             <div className="flex flex-row items-start text-[#172033] justify-center gap-20
         max-[1100px]:gap-10 max-[900px]:flex-col max-[900px]:items-center mt-10">
                 <div className="flex flex-col gap-2 w-[500px] max-[1100px]:w-[400px] max-[450px]:w-[350px]">
                 <p className="font-[600] text-[19px]">
-                    Échangeons ensemble
+                    Nous contacter
                 </p>
 
                 <p className="text-[15px] leading-5.5">
@@ -27,12 +30,12 @@ const Localisation = () => {
 
                  <div className="flex flex-col ">
                     <p className="font-[600] text-[18px]">📍 Adresse:</p>
-                    <p className="text-[16px]">Saint Charles, Les vergers, Kouba, Alger</p>
+                    <p className="text-[16px]">{agency.address}</p>
                  </div>
                 </div>
 
                 <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.57932120943832!2d3.0575804784894007!3d36.72384596490868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fad00531ca6f9%3A0x8a985ede982d69fb!2sBureau%20d'affaire%20el%20wissem!5e1!3m2!1sfr!2sdz!4v1788280822640!5m2!1sfr!2sdz"
+            src={agency.mapsUrl}
             className="w-[500px] h-[350px] max-[1100px]:w-[400px] max-[450px]:w-[350px]  max-[1050px]:h-[300px]  max-[800px]:h-[200px] "
             style={{ border: 0 }}
             allowFullScreen
@@ -46,6 +49,7 @@ const Localisation = () => {
             <div className="flex flex-row items-start text-[#172033] justify-center gap-20
         max-[1100px]:gap-10 max-[900px]:flex-col max-[900px]:items-center mt-15">
              <img src="https://res.cloudinary.com/dub4fhabm/image/upload/v1788281892/welcoming_z06s9m.jpg"
+             alt="Accueil de l'agence immobilière El Ahlem à Kouba, Alger"
                 className="w-[500px] h-[350px] object-contain max-[1100px]:w-[400px] max-[450px]:w-[350px]  max-[1050px]:h-[300px]  max-[800px]:h-[200px] "
                 />
                 <div className="flex flex-col gap-2 w-[500px] max-[1100px]:w-[400px] max-[450px]:w-[350px]">

@@ -141,7 +141,7 @@ const [loadingVisitesStats, setLoadingVisitesStats] =
             }
 
             setVisites(data.data)
-            console.log("Biens : ", data.data)
+            console.log("Visites : ", data.data)
             setTotal(data.pagination.total);
             setTotalPages(data.pagination.totalPages);
 

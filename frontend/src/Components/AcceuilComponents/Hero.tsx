@@ -31,14 +31,33 @@ const Hero = () => {
 
             <div
                 className="
-                    flex flex-col px-10 w-full
-                    bg-black/60 gap-5 h-full
+                    flex flex-col px-10 w-full h-full
+                    bg-gradient-to-b from-black/70 via-black/55 to-black/70
+                    gap-5
                     max-[1025px]:px-10
                     max-[780px]:px-5
-                    items-center
                     max-[600px]:px-5
+                    items-center justify-center
                 "
             >
+
+                {/* BADGE */}
+                <motion.div
+                    initial={{ opacity: 0, y: -15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="
+                        flex items-center gap-2
+                        border border-[#cdad7d]/60 bg-white/5
+                        backdrop-blur-sm
+                        px-4 py-1.5 rounded-full
+                    "
+                >
+                    
+                    <p className="text-[#cdad7d] text-[13px] font-[600] tracking-wide">
+                        Agence immobilière à Alger
+                    </p>
+                </motion.div>
 
                 {/* TITRE */}
                 <motion.h1
@@ -46,18 +65,21 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         duration: 0.8,
+                        delay: 0.1,
                         ease: "easeOut",
                     }}
                     className="
-                        mt-15 text-white font-black text-[2em]
+                        text-white font-black text-[2.4em]
                         font-['Playfair_Display']
-                        text-center leading-10
-                        max-[450px]:text-[1.5em]
+                        text-center leading-11
+                        max-[750px]:text-[2em] max-[750px]:leading-10
+                        max-[450px]:text-[1.6em] max-[450px]:leading-9
                     "
                 >
-                     El Ahlem, votre agence immobilière à Alger
+                    Trouvez le bien qui correspond
+                    <br className="max-[450px]:hidden" />
+                    {" "}vraiment à votre projet
                 </motion.h1>
-
 
                 {/* DESCRIPTION */}
                 <motion.h3
@@ -65,25 +87,23 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         duration: 0.8,
-                        delay: 0.2,
+                        delay: 0.25,
                         ease: "easeOut",
                     }}
                     className="
-                        text-[17px] font-[600] text-white text-center w-[700px]
-                        max-[750px]:w-[400px]
+                        text-[17px] font-[500] text-gray-100 text-center w-[650px]
+                        leading-6.5
+                        max-[750px]:w-[450px]
                         max-[450px]:w-[300px]
                         max-[450px]:text-[15px]
                     "
                 >
-                   El Ahlem est une agence immobilière à Alger spécialisée dans
-                    l'achat, la vente et la location de biens immobiliers.
-                    Découvrez nos appartements, villas, terrains et locaux dans
-                    plusieurs secteurs d'Alger et bénéficiez d'un accompagnement
-                    personnalisé à chaque étape de votre projet.
+                    El Ahlem vous accompagne dans l'achat, la vente et la location
+                    de biens immobiliers à Alger : appartements, villas, terrains
+                    et locaux, avec un suivi personnalisé à chaque étape.
                 </motion.h3>
 
-
-                {/* STATISTIQUES */}
+                {/* BOUTONS */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -93,10 +113,70 @@ const Hero = () => {
                         ease: "easeOut",
                     }}
                     className="
-                        flex flex-row items-center gap-7 mt-3
+                        flex flex-row items-center gap-3 mt-2
+                        max-[450px]:mt-1
+                        max-[450px]:flex-col max-[450px]:w-[280px]
+                    "
+                >
+
+                    <motion.button
+                        onClick={() => navigate("/biens")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="
+                            bg-[#cdad7d]
+                            text-[#222344]
+                            text-[15px]
+                            px-4 py-2.5
+                            cursor-pointer
+                            rounded-[5px]
+                            shadow-2xl
+                            font-[600]
+                            flex items-center gap-2
+                            max-[450px]:w-full max-[450px]:justify-center
+                        "
+                    >
+                        Voir les biens
+                        <i className="fa-solid fa-arrow-right text-[13px]"></i>
+                    </motion.button>
+
+                    <motion.a
+                        href="#about"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="
+                            bg-transparent
+                            border border-white/40
+                            text-white
+                            text-[15px]
+                            px-4 py-2.5
+                            cursor-pointer
+                            rounded-[5px]
+                            font-[500]
+                            max-[450px]:w-full max-[450px]:text-center
+                        "
+                    >
+                        Découvrir El Ahlem
+                    </motion.a>
+
+                </motion.div>
+
+                {/* STATISTIQUES */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                        duration: 0.8,
+                        delay: 0.55,
+                        ease: "easeOut",
+                    }}
+                    className="
+                        flex flex-row items-center gap-8 mt-6
+                        border-t border-white/15 pt-6
                         max-[450px]:flex-col
-                        max-[450px]:items-baseline
-                        max-[450px]:gap-3
+                        max-[450px]:items-center
+                        max-[450px]:gap-4
+                        max-[450px]:border-t-0 max-[450px]:pt-2
                     "
                 >
 
@@ -107,78 +187,22 @@ const Hero = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{
                                 duration: 0.5,
-                                delay: 0.5 + index * 0.15,
+                                delay: 0.65 + index * 0.15,
                                 ease: "easeOut",
                             }}
                             className="
-                                flex flex-col items-baseline text-white
-                                border-l-3 border-l-white pl-2
+                                flex flex-col items-center text-white
                             "
                         >
-                            <div className="font-bold">
+                            <div className="font-bold text-[#cdad7d]">
                                 <Counter end={s.value} />
                             </div>
 
-                            <p className="text-[15px] font-[600]">
+                            <p className="text-[13px] font-[500] text-gray-200 tracking-wide">
                                 {s.label.toUpperCase()}
                             </p>
                         </motion.div>
                     ))}
-
-                </motion.div>
-
-
-                {/* BOUTONS */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 0.8,
-                        delay: 0.8,
-                        ease: "easeOut",
-                    }}
-                    className="
-                        flex flex-row items-center gap-3 mt-5
-                        max-[450px]:mt-2
-                    "
-                >
-
-                    <motion.a
-                        href="#about"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="
-                            bg-[#222344]
-                            text-white
-                            text-[15px]
-                            p-2
-                            cursor-pointer
-                            rounded-[5px]
-                            shadow-2xl
-                            font-[500]
-                        "
-                    >
-                        Découvrir El Ahlem
-                    </motion.a>
-
-
-                    <motion.button
-                        onClick={() => navigate("/biens")}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="
-                            bg-gray-50
-                            text-[#222344]
-                            text-[15px]
-                            p-2
-                            cursor-pointer
-                            rounded-[5px]
-                            shadow-2xl
-                            font-[500]
-                        "
-                    >
-                        Voir les biens
-                    </motion.button>
 
                 </motion.div>
 
