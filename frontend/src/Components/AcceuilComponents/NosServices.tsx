@@ -86,7 +86,9 @@ const NosServices = () => {
                     return(
                        <div className="text-white bg-[#222344] p-2 w-[300px] h-[300px] rounded-[10px]
                        shadow-2xl flex flex-col gap-2 transition-transform duration-200 hover:scale-105 
-                       ">
+                       "
+                       key={s.id}
+                       >
                         <Icon name={s.icon} size={40}/>
                         <h3 className="text-[1.1em] font-bold leading-6">
                             {s.title}

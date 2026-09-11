@@ -40,6 +40,9 @@ import { TestimonialsProvider } from './Contexts/TestimonialsContext'
 import { ContactProvider } from './Contexts/ContactContext';
 import MentionsLegales from './Pages/MentionsLegales'
 import PrivacyPolicy from './Pages/PrivacyPolicy'
+import { AdminCommuneProvider } from './AdminContexts/AdminCommuneContext'
+import AdminCommunes from './AdminPages/AdminCommunes'
+import { CommunesProvider } from './Contexts/CommunesContext'
 
 
 function App() {
@@ -61,6 +64,8 @@ function App() {
                           <FavoritesProvider>
                             <TestimonialsProvider>
                               <ContactProvider>
+                                <AdminCommuneProvider>
+                                  <CommunesProvider>
       <Routes>
 
         <Route element={
@@ -144,8 +149,11 @@ function App() {
          <Route path='profile' element={<AdminProfile/>}/>
          <Route path='notifications' element={<Notifications/>}/>
          <Route path='guide' element={<Guide/>}/>
+         <Route path='communes' element={<AdminCommunes/>}/>
       </Route>
       </Routes>
+      </CommunesProvider>
+      </AdminCommuneProvider>
       </ContactProvider>
       </TestimonialsProvider>
       </FavoritesProvider>

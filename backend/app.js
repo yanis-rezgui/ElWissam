@@ -20,6 +20,7 @@ import { initializeSocket } from "./socket/socket.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
 import favorisRouter from "./routes/favoris.routes.js";
 import contactRouter from "./routes/contact.routes.js";
+import communesRouter from "./routes/communes.routes.js";
 
 
 const app = express();
@@ -52,6 +53,7 @@ app.use('/api/v1/notifications', notificationsRouter);
 app.use('/api/v1/dashboard', dashboardRouter);
 app.use('/api/v1/favoris', favorisRouter);
 app.use('/api/v1/contact', contactRouter);
+app.use('/api/v1/communes', communesRouter);
 
 app.use(errorMiddleware);
 

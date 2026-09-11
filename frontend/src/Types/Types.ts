@@ -260,3 +260,15 @@ export interface NotificationsStats {
     unread: number;
     read: number;
 }
+
+
+export interface Commune {
+  id: string;
+  name: string;
+  imageUrl: string | null;
+  imagePublicId: string | null;
+  active: boolean;
+  order: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

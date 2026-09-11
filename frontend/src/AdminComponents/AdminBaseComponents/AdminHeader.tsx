@@ -158,7 +158,16 @@ const AdminHeader = () => {
                         <p>Avis clients</p>
                     </div>
 
-
+                      
+                     <div
+                     onClick={()=>navigate('/admin/communes')}
+                    style={{backgroundColor : location.pathname === "/admin/communes" ? "#f3f4f6" : "",
+                           fontWeight : location.pathname === "/admin/communes" ? "600" : "400"
+                     }}
+                    className="p-3 flex flex-row items-center gap-2 text-[17px] transition-all duration-200 hover:bg-gray-100 cursor-pointer">
+                        <Icon name="MapPinned" size={25}/>
+                        <p>Communes</p>
+                    </div>
                 
                      <div
                      onClick={()=>navigate('/admin/guide')}
