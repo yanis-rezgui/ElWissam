@@ -67,7 +67,7 @@ const SignIn = () => {
                 />
             </div>
 
-            <Link to="/"
+            <Link to="/forgot-password"
             className="text-[15px] cursor-pointer text-gray-800 
            transition-opa
 

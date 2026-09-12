@@ -236,7 +236,7 @@ export const addUser = async(req , res , next) => {
 
         if(!role || !["ADMIN", "USER"].includes(role.trim())){
             return res.status(400).json({
-                success : true,
+                success : false,
                 message : "Erreure le role doit etre soit 'USER' ou 'ADMIN'"
             });
         }

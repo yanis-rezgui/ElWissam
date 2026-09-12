@@ -43,6 +43,10 @@ import PrivacyPolicy from './Pages/PrivacyPolicy'
 import { AdminCommuneProvider } from './AdminContexts/AdminCommuneContext'
 import AdminCommunes from './AdminPages/AdminCommunes'
 import { CommunesProvider } from './Contexts/CommunesContext'
+import { ForgotPasswordProvider } from './Contexts/ForgotPasswordContext'
+import ForgotPassword from './Pages/ForgotPassword'
+import ResetPassword from './Pages/ResetPassword'
+import ScrollToTop from './ScrollToTop'
 
 
 function App() {
@@ -66,6 +70,10 @@ function App() {
                               <ContactProvider>
                                 <AdminCommuneProvider>
                                   <CommunesProvider>
+                                    <ForgotPasswordProvider>
+
+                                      <ScrollToTop/>
+                                      
       <Routes>
 
         <Route element={
@@ -128,6 +136,9 @@ function App() {
         <Route path='/privacy' element={
           <PrivacyPolicy/>
         }/>
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
         </Route>
 
 
@@ -152,6 +163,7 @@ function App() {
          <Route path='communes' element={<AdminCommunes/>}/>
       </Route>
       </Routes>
+      </ForgotPasswordProvider>
       </CommunesProvider>
       </AdminCommuneProvider>
       </ContactProvider>

@@ -42,14 +42,17 @@ enum StatutDemande {
 model User {
   id        String   @id @default(uuid())
   firstName String
-  lastName String
+  lastName  String
   email     String   @unique
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  favoris Bien[]
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
+
+  favoris       Bien[]
   notifications Notification[]
 }
 

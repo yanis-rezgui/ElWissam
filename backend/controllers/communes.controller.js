@@ -84,7 +84,7 @@ export const getAllCommunes = async(req , res , next) => {
            }
         })
     }catch(err){
-        console.error(err);
+        next(err);
     }
 }
 

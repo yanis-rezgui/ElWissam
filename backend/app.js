@@ -21,6 +21,7 @@ import dashboardRouter from "./routes/dashboard.routes.js";
 import favorisRouter from "./routes/favoris.routes.js";
 import contactRouter from "./routes/contact.routes.js";
 import communesRouter from "./routes/communes.routes.js";
+import globalRateLimiter from "./middlewares/globalRateLimiter.js";
 
 
 const app = express();
@@ -41,6 +42,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}))
+
+app.use('/api/v1', globalRateLimiter);
 
 app.use('/api/v1/biens', biensRouter)
 app.use('/api/v1/visites', reservationRouter);
