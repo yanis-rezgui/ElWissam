@@ -46,6 +46,12 @@ app.use(express.urlencoded({extended : true}))
 
 app.use('/api/v1', globalRateLimiter);
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+  });
+});
+
 app.use('/api/v1/biens', biensRouter)
 app.use('/api/v1/visites', reservationRouter);
 app.use('/api/v1/auth', authRouter);
