@@ -9,6 +9,7 @@ export const initializeSocket = (server) => {
         cors: {
             origin: [
                 "http://localhost:5173",
+                "https://el-ahlem.vercel.app"
                 // "https://ton-site-vercel.app"
             ],
             credentials: true

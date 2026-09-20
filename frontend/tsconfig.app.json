@@ -22,5 +22,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "../../Nova/frontend/src/AdminComponents/AdminClothDetailsComponents"]
 }
