@@ -50,7 +50,7 @@ const AdminBiensTable = () => {
             ) : biens.length === 0 ? (
                 <div className="flex justify-center items-center py-10 text-gray-500 font-[500]">
                     Aucun bien trouvé.
-                </div>"/placeholder-property.jpg"
+                </div>
             ) : (
                 <>
                     {/* ---- Vue desktop : tableau ---- */}
@@ -82,7 +82,7 @@ const AdminBiensTable = () => {
                                     >
                                         <td className="p-3 flex flex-row items-center gap-3">
                                             <img
-                                                src={bien.images?.[0].url || "./image-bien.url"}
+                                                src={bien.images?.[0]?.url || "./image-bien.url"}
                                                 alt={bien.nom}
                                                 className="w-[50px] h-[50px] rounded-[8px] object-cover bg-gray-100"
                                             />
@@ -141,7 +141,7 @@ const AdminBiensTable = () => {
                                 className="bg-white rounded-[10px] shadow-2xl p-3 flex flex-row gap-3"
                             >
                                 <img
-                                    src={bien.images?.[0].url || "./image-url"}
+                                    src={bien.images?.[0]?.url || "./image-url"}
                                     alt={bien.nom}
                                     className="w-[70px] h-[70px] rounded-[8px] object-cover bg-gray-100 flex-shrink-0"
                                 />

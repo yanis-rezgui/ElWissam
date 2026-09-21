@@ -53,7 +53,7 @@ const AdminCommunesTable = ({ onSelectCommune }: { onSelectCommune: (commune: Co
                                 <td className="p-3">
                                     {commune.imageUrl ? (
                                         <img
-                                            src={commune.imageUrl}
+                                            src={commune?.imageUrl || ''}
                                             alt={commune.name}
                                             className="w-[50px] h-[50px] object-cover rounded-[5px]"
                                         />
@@ -115,7 +115,7 @@ const AdminCommunesTable = ({ onSelectCommune }: { onSelectCommune: (commune: Co
                     <div key={commune.id} className="bg-white border border-gray-300 rounded-[10px] p-3 flex flex-row gap-3 items-center shadow-md">
                         {commune.imageUrl ? (
                             <img
-                                src={commune.imageUrl || "image-url"}
+                                src={commune?.imageUrl || "image-url"}
                                 alt={commune.name}
                                 className="w-[60px] h-[60px] object-cover rounded-[5px] shrink-0"
                             />

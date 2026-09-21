@@ -39,7 +39,7 @@ const BienCard = ({ bien }: { bien: Bien }) => {
             {/* IMAGE */}
             <div className="relative w-full h-[170px] overflow-hidden">
                 <img
-                    src={bien.images[0].url || "./bien.jpeg"}
+                    src={bien.images?.[0]?.url || "./bien.jpeg"}
                     alt={bien.nom}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />

@@ -10,7 +10,7 @@ const FirstDetailsSection = () => {
         <div className="flex flex-wrap items-start gap-5 mt-10 justify-center w-full">
            
            <div className="flex flex-col justify-center items-center gap-2">
-               <img src={currentBien?.images[index].url} 
+               <img src={currentBien?.images[index]?.url} 
                className="w-[300px] h-[300px]  object-contain"
                />
 
