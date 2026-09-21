@@ -31,7 +31,7 @@ const InformationGenerales = ({modifBien, setModifBien} : {modifBien : Bien | nu
                 "
                 />
             </div>
-
+    
             <div className="flex flex-col gap-2">
                 <label htmlFor=""
                 className="text-[15px] font-[600]"

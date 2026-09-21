@@ -106,7 +106,7 @@ const Communes = () => {
                                 }}
                             >
                                 <img
-                                    src={d.imageUrl}
+                                    src={d.imageUrl || "./image-commune"}
                                     alt={`Immobilier à ${d.name} - El Ahlem`}
                                     className="
                                         w-[200px] h-[150px]

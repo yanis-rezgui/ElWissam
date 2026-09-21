@@ -35,7 +35,7 @@ const Localisation = () => {
                 </div>
 
                 <iframe 
-            src={agency.mapsUrl}
+            src={agency.mapsUrl || "url"}
             className="w-[500px] h-[350px] max-[1100px]:w-[400px] max-[450px]:w-[350px]  max-[1050px]:h-[300px]  max-[800px]:h-[200px] "
             style={{ border: 0 }}
             allowFullScreen

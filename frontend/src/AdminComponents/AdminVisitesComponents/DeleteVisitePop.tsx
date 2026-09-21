@@ -28,7 +28,7 @@ const DeleteVisitePop = () => {
 
                 {visiteDelete?.bien?.images?.[0] && (
                     <img
-                        src={visiteDelete.bien.images[0]}
+                        src={visiteDelete.bien.images[0] || "./bien-image"}
                         className="w-[250px] h-[150px] object-cover rounded-[10px] mt-5 border border-gray-300"
                         alt=""
                     />

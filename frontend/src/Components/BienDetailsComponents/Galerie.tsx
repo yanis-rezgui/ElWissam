@@ -64,7 +64,7 @@ const Galerie = ({
                     </button>
 
                     <img
-                        src={images[currentImg].url}
+                        src={images[currentImg].url || "./image-url"}
                         className="max-w-[900px] w-full object-contain h-[500px] rounded-xl
                         max-[850px]:h-[350px] max-[550px]:h-[280px]"
                         alt=""
@@ -97,7 +97,7 @@ const Galerie = ({
                                 ? "ring-2 ring-[#cdad7d] opacity-100"
                                 : "opacity-50 hover:opacity-80"}`}
                         >
-                            <img src={img.url} className="w-full h-full object-cover" alt="" />
+                            <img src={img.url || "./image.jpeg"} className="w-full h-full object-cover" alt="" />
                         </button>
                     ))}
                 </div>

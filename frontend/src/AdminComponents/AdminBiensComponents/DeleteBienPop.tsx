@@ -24,7 +24,7 @@ const DeleteBienPop = () => {
                 </p>
 
                 <img
-                    src={bienDelete?.images[0]}
+                    src={bienDelete?.images[0] || "image-url"}
                     className="w-[250px] h-[180px] object-cover rounded-[10px] mt-5 border border-gray-300"
                     alt=""
                 />

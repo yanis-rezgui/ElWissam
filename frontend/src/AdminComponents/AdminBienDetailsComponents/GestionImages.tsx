@@ -59,7 +59,7 @@ const GestionImages = ({ oldImages, setOldImages, newImages, setNewImages }: Ges
             <div className="flex flex-wrap gap-3 mt-2">
                 {oldImages.map((img, i) => (
                     <div key={`old-${i}`} className="relative w-[100px] h-[100px]">
-                        <img src={img.url} alt="" className="w-full h-full object-cover rounded-[5px] border border-gray-300" />
+                        <img src={img?.url || "/placeholder-property.jpg"} alt="" className="w-full h-full object-cover rounded-[5px] border border-gray-300" />
                         <button
                             type="button"
                             onClick={() => removeOldImage(i)}
@@ -74,7 +74,7 @@ const GestionImages = ({ oldImages, setOldImages, newImages, setNewImages }: Ges
                 {newImages.map((file, i) => (
                     <div key={`new-${i}`} className="relative w-[100px] h-[100px]">
                         <img
-                            src={URL.createObjectURL(file)}
+                            src={URL.createObjectURL(file) || "/placeholder-property.jpg"}
                             alt=""
                             className="w-full h-full object-cover rounded-[5px] border-2 border-[#cdad7d]"
                         />

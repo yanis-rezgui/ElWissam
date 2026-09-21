@@ -93,7 +93,7 @@ const DetailsHero = () => {
                                     ? "ring-2 ring-[#cdad7d] opacity-100"
                                     : "opacity-60 hover:opacity-90"}`}
                             >
-                                <img src={im.url} alt="" className="w-full h-full object-cover" />
+                                <img src={im.url || "./image-url"} alt="" className="w-full h-full object-cover" />
                             </button>
                         ))}
                     </div>

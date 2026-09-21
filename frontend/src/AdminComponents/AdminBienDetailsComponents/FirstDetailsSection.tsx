@@ -19,7 +19,7 @@ const FirstDetailsSection = () => {
                >
                 {currentBien?.images.map((img, i)=>{
                     return(
-                        <img src={img.url} alt="" key={i}
+                        <img src={img?.url || "/placeholder-property.jpg"} alt="" key={i}
                         onClick={()=>setIndex(i)}
                         className={`w-[50px] h-[50px] object-cover 
                             ${i === index && "border-2 border-gray-500 p-1"} rounded-[5px]
