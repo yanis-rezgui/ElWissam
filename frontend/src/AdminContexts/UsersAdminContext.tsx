@@ -582,7 +582,8 @@ export const UsersAdminProvider = ({
         currentPage,
         pageLimit,
         search,
-        role
+        role,
+        token
     ]);
 
 

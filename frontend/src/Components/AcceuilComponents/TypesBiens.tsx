@@ -45,7 +45,7 @@ const TypesBiens = () => {
     }
 ];
 
-     const {setBiensFilter, biensFilter} = useBiensContext();
+     const {setClientBiensFilter, clientBiensFilter} = useBiensContext();
 
      const navigate = useNavigate();
     return(
@@ -86,8 +86,8 @@ const TypesBiens = () => {
 
                        <button 
                        onClick={()=>{
-                        setBiensFilter({
-                            ...biensFilter,
+                        setClientBiensFilter({
+                            ...clientBiensFilter,
                             type : p.filter
                         })
 

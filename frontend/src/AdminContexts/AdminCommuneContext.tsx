@@ -127,7 +127,7 @@ export const AdminCommuneProvider = ({children} : {children : React.ReactNode}) 
     useEffect(()=>{
         if(!token || user?.role !== "ADMIN") return;
         getAllCommunes();
-    }, [page, name, active, limit]);
+    }, [page, name, active, limit, token]);
 
     useEffect(() => {
     setPage(1);

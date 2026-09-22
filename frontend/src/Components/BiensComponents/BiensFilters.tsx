@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react";
 const emptyFilters = { service: "", type: "", prixMin: undefined, prixMax: undefined, search: "" };
 
 const BiensFilters = () => {
-    const { biensFilter, setBiensFilter } = useBiensContext();
+    const { clientBiensFilter, setClientBiensFilter } = useBiensContext();
 
     return (
         <div className="flex flex-col bg-[#222344] w-[280px] rounded-2xl p-4 text-gray-100
@@ -14,7 +14,7 @@ const BiensFilters = () => {
             <div className="flex items-center justify-between">
                 <p className="text-[17px] font-bold">Filtrer</p>
                 <button
-                    onClick={() => setBiensFilter(emptyFilters)}
+                    onClick={() => setClientBiensFilter(emptyFilters)}
                     className="flex items-center gap-1 text-[12px] text-[#cdad7d] hover:text-white
                     transition-colors duration-200 cursor-pointer"
                 >
@@ -27,8 +27,8 @@ const BiensFilters = () => {
                 <select
                     className="p-2.5 bg-gray-50 text-[#222344] rounded-lg text-[14px] font-medium cursor-pointer
                     focus:outline-none focus:ring-2 focus:ring-[#cdad7d]"
-                    value={biensFilter.type}
-                    onChange={(e) => setBiensFilter({ ...biensFilter, type: e.target.value })}
+                    value={clientBiensFilter.type}
+                    onChange={(e) => setClientBiensFilter({ ...clientBiensFilter, type: e.target.value })}
                 >
                     <option value="">Tous</option>
                     <option value="APPARTEMENT">Appartement</option>
@@ -43,8 +43,8 @@ const BiensFilters = () => {
                 <select
                     className="p-2.5 bg-gray-50 text-[#222344] rounded-lg text-[14px] font-medium cursor-pointer
                     focus:outline-none focus:ring-2 focus:ring-[#cdad7d]"
-                    value={biensFilter.service}
-                    onChange={(e) => setBiensFilter({ ...biensFilter, service: e.target.value })}
+                    value={clientBiensFilter.service}
+                    onChange={(e) => setClientBiensFilter({ ...clientBiensFilter, service: e.target.value })}
                 >
                     <option value="">Tout</option>
                     <option value="VENTE">Vente</option>
@@ -58,9 +58,9 @@ const BiensFilters = () => {
                     <input
                         type="number"
                         placeholder="Min"
-                        value={biensFilter.prixMin ?? ""}
+                        value={clientBiensFilter.prixMin ?? ""}
                         onChange={(e) =>
-                            setBiensFilter({ ...biensFilter, prixMin: Number(e.target.value) || undefined })
+                            setClientBiensFilter({ ...clientBiensFilter, prixMin: Number(e.target.value) || undefined })
                         }
                         className="p-2.5 bg-gray-50 text-[#222344] rounded-lg text-[14px] w-1/2
                         focus:outline-none focus:ring-2 focus:ring-[#cdad7d]"
@@ -68,9 +68,9 @@ const BiensFilters = () => {
                     <input
                         type="number"
                         placeholder="Max"
-                        value={biensFilter.prixMax ?? ""}
+                        value={clientBiensFilter.prixMax ?? ""}
                         onChange={(e) =>
-                            setBiensFilter({ ...biensFilter, prixMax: Number(e.target.value) || undefined })
+                            setClientBiensFilter({ ...clientBiensFilter, prixMax: Number(e.target.value) || undefined })
                         }
                         className="p-2.5 bg-gray-50 text-[#222344] rounded-lg text-[14px] w-1/2
                         focus:outline-none focus:ring-2 focus:ring-[#cdad7d]"

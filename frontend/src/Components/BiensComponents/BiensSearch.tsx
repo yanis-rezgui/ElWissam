@@ -3,7 +3,7 @@ import { useBiensContext } from "../../Contexts/BiensContext";
 import { Search } from "lucide-react";
 
 const BiensSearch = () => {
-    const { setBiensFilter, biensFilter } = useBiensContext();
+    const { setClientBiensFilter, clientBiensFilter } = useBiensContext();
 
     return (
         <div className="flex flex-col bg-[#222344] w-[700px] rounded-2xl p-4 text-gray-100
@@ -19,9 +19,9 @@ const BiensSearch = () => {
                     className="p-2.5 bg-gray-50 text-[#222344] rounded-lg text-[14px] font-medium cursor-pointer
                     border border-transparent focus:outline-none focus:ring-2 focus:ring-[#cdad7d]
                     max-[750px]:w-full"
-                    value={biensFilter.service}
+                    value={clientBiensFilter.service}
                     onChange={(e) =>
-                        setBiensFilter({ ...biensFilter, service: e.target.value })
+                        setClientBiensFilter({ ...clientBiensFilter, service: e.target.value })
                     }
                 >
                     <option value="">Tout</option>
@@ -32,9 +32,9 @@ const BiensSearch = () => {
                 <div className="relative max-[750px]:w-full">
                     <input
                         type="text"
-                        value={biensFilter.search}
+                        value={clientBiensFilter.search}
                         onChange={(e) =>
-                            setBiensFilter({ ...biensFilter, search: e.target.value })
+                            setClientBiensFilter({ ...clientBiensFilter, search: e.target.value })
                         }
                         placeholder="Localisation ou nom du bien..."
                         className="w-[400px] text-[14px] border border-transparent pl-4 pr-10

@@ -193,7 +193,7 @@ export const TestimonialsAdminProvider = ({children} : {children : React.ReactNo
     useEffect(()=>{
         if(!token || user?.role !== "ADMIN") return;
         getAllTestimonials();
-    }, [fullName, active]);
+    }, [fullName, active, token]);
 
 
 

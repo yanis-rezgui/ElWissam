@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getBien, getBiens, getBiensStats } from "../controllers/biens.controller.js";
+import { getBien, getBiens, getBiensStats, getClientBiens } from "../controllers/biens.controller.js";
 import multer from "multer"
 import authorize from "../middlewares/auth.middleware.js";
 import isAdmin from "../middlewares/admin.middleware.js";
@@ -23,6 +23,8 @@ const upload = multer({
 });
 
 biensRouter.get('/', getBiens);
+
+biensRouter.get('/public', getClientBiens);
 
 biensRouter.get('/stats', getBiensStats);
 

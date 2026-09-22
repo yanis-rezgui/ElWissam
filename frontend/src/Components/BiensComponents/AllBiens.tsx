@@ -9,17 +9,17 @@ const BienCardSkeleton = () => (
 );
 
 const AllBiens = () => {
-    const { biens, loadingBiens } = useBiensContext();
+    const { clientBiens, loadingClientBiens } = useBiensContext();
 
     return (
         <div className="flex-1 flex flex-col items-center w-full max-w-[900px]">
-            {loadingBiens ? (
+            {loadingClientBiens ? (
                 <div className="flex flex-wrap gap-4 justify-center w-full">
                     {Array.from({ length: 6 }).map((_, i) => (
                         <BienCardSkeleton key={i} />
                     ))}
                 </div>
-            ) : biens.length === 0 ? (
+            ) : clientBiens.length === 0 ? (
                 <div className="flex flex-col items-center justify-center gap-3 py-20 text-center">
                     <SearchX size={40} className="text-gray-400" />
                     <p className="text-[#222344] font-semibold">Aucun bien ne correspond à ta recherche</p>
@@ -27,7 +27,7 @@ const AllBiens = () => {
                 </div>
             ) : (
                 <div className="flex flex-wrap gap-4 justify-center w-full">
-                    {biens.map((b) => (
+                    {clientBiens.map((b) => (
                         <BienCard bien={b} key={b.id} />
                     ))}
                 </div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCommunesContext } from "../../Contexts/CommunesContext";
 
 const Communes = () => {
-    const { biensFilter, setBiensFilter } = useBiensContext();
+    const { clientBiensFilter, setClientBiensFilter } = useBiensContext();
     const { communesClient, loadingCommunes } = useCommunesContext();
 
     const navigate = useNavigate();
@@ -97,8 +97,8 @@ const Communes = () => {
                                     hover:scale-105 cursor-pointer
                                 "
                                 onClick={() => {
-                                    setBiensFilter({
-                                        ...biensFilter,
+                                    setClientBiensFilter({
+                                        ...clientBiensFilter,
                                         search: d.name
                                     });
 

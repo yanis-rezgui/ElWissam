@@ -306,7 +306,7 @@ const [loadingVisitesStats, setLoadingVisitesStats] =
     if (!token || user?.role !== "ADMIN") return;
 
     getVisites();
-}, [page, limit, search, statut]);
+}, [page, limit, search, statut, token]);
 
     
      useEffect(() => {
@@ -319,7 +319,7 @@ useEffect(() => {
     if (!token || user?.role !== "ADMIN") return;
 
     getVisitesStats();
-}, []);
+}, [token]);
 
     return <AdminVisitesContext.Provider value={{
             visites,

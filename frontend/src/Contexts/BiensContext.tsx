@@ -1,10 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Bien, BienFilterType, BiensStats } from "../Types/Types";
 
-
-
-
-
 interface BiensContextType{
     biens : Bien[];
     loadingBiens : boolean;
@@ -26,6 +22,18 @@ interface BiensContextType{
     loadingBiensStats : boolean;
     getBiensStats: () => Promise<void>;
 
+    // === Client (public) ===
+    clientBiens : Bien[];
+    loadingClientBiens : boolean;
+    getClientBiens : ()=>Promise<void>;
+    clientBiensFilter : BienFilterType;
+    setClientBiensFilter : (b : BienFilterType)=>void;
+    clientPage: number;
+    setClientPage: React.Dispatch<React.SetStateAction<number>>;
+    clientLimit: number;
+    setClientLimit: React.Dispatch<React.SetStateAction<number>>;
+    clientTotal: number;
+    clientTotalPages: number;
 }
 
 
@@ -173,6 +181,87 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
         }
     }
 
+    // =========================
+    // CLIENT (PUBLIC) BIENS
+    // =========================
+
+    const [clientBiens, setClientBiens] = useState<Bien[]>([]);
+    const [loadingClientBiens, setLoadingClientBiens] = useState<boolean>(false);
+
+    const [clientBiensFilter, setClientBiensFilter] = useState<BienFilterType>(()=>{
+        const saved = localStorage.getItem('clientBiensFilter');
+
+        return saved ? JSON.parse(saved) : {
+              service: "",
+              type: "",
+
+              prixMin: undefined,
+              prixMax: undefined,
+              search: ""
+        }
+    });
+
+    useEffect(()=>{
+        localStorage.setItem('clientBiensFilter', JSON.stringify(clientBiensFilter));
+    }, [clientBiensFilter])
+
+    const [clientPage, setClientPage] = useState<number>(1);
+    const [clientLimit, setClientLimit] = useState<number>(10);
+    const [clientTotal, setClientTotal] = useState(0);
+    const [clientTotalPages, setClientTotalPages] = useState(0);
+
+    const getClientBiens = async() => {
+
+        setLoadingClientBiens(true)
+         try{
+            const params = new URLSearchParams();
+
+            params.append("page", clientPage.toString());
+            params.append("limit", clientLimit.toString());
+
+            if(clientBiensFilter.type){
+                params.append("type", clientBiensFilter.type)
+            }
+
+            if(clientBiensFilter.service){
+                params.append("service", clientBiensFilter.service)
+            }
+
+            if (clientBiensFilter.prixMin && clientBiensFilter.prixMin >= 0) {
+                params.append("prixMin", clientBiensFilter.prixMin.toString());
+            }
+
+            if (clientBiensFilter.prixMax && clientBiensFilter.prixMax >= 0) {
+                params.append("prixMax", clientBiensFilter.prixMax.toString());
+            }
+
+            if (clientBiensFilter.search?.trim()) {
+                params.append("search", clientBiensFilter.search.trim());
+            }
+
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/biens/public?${params.toString()}`, {
+                method : "GET",
+            });
+
+            const data = await res.json();
+
+            if(!res.ok){
+                throw new Error(data.error || data.message || "Error in fetching client biens")
+            }
+
+            setClientBiens(data.data)
+            console.log("Client Biens : ", data.data)
+            setClientTotal(data.pagination.total);
+            setClientTotalPages(data.pagination.totalPages);
+
+         }catch(err){
+            console.error(err);
+         }finally{
+            setLoadingClientBiens(false)
+         }
+
+    }
+
     useEffect(()=>{
         getAllBiens();
     }, [biensFilter, page, limit])
@@ -180,6 +269,10 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
     useEffect(()=>{
         getBiensStats();
     }, []);
+
+    useEffect(()=>{
+        getClientBiens();
+    }, [clientBiensFilter, clientPage, clientLimit])
 
 
     return <BiensContext.Provider value={{
@@ -200,7 +293,19 @@ export const BiensProvider = ({children} : {children : React.ReactNode}) => {
     currentBien,
     biensStats,
     loadingBiensStats ,
-    getBiensStats
+    getBiensStats,
+
+    clientBiens,
+    loadingClientBiens,
+    getClientBiens,
+    clientBiensFilter,
+    setClientBiensFilter,
+    clientPage,
+    setClientPage,
+    clientLimit,
+    setClientLimit,
+    clientTotal,
+    clientTotalPages
     }}>
         {children}
     </BiensContext.Provider>
