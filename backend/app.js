@@ -35,7 +35,8 @@ app.use(helmet())
 app.use(cors({ 
     origin : [
         "http://localhost:5173",
-        "https://el-ahlem.vercel.app"
+        "https://el-ahlem.vercel.app",
+        "http://localhost:5174"
     ],
     credentials: true
 }));

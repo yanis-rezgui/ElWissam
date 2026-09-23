@@ -23,7 +23,7 @@ const StatsComponent = () => {
                     <Icon name="Star" size={25}/>
                     <p className="text-[17px] font-[500]
                     
-                    ">{user?.favoris.length} Favoris</p>
+                    ">{user?.favoris?.length || 0} Favoris</p>
                   </div>
         </div>
     )

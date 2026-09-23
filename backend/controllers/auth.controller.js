@@ -74,9 +74,12 @@ export const signUp = async(req , res , next) => {
         const newUser = await prisma.user.create({
             data : {
             firstName,
-            lastName,
+            lastName, 
             email,
-            password : hashedPassword}
+            password : hashedPassword},
+            include : {
+                favoris : true
+            }
         });
 
          const token = jwt.sign({userId : newUser.id}, JWT_SECRET, {expiresIn : JWT_EXPIRES_IN});
